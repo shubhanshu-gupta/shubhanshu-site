@@ -1,0 +1,64 @@
+---
+title: "Emotions in Ted Talks: Text Analytics in R"
+date: "2018-11-29"
+slug: "emotions-in-ted-talks"
+category: "technical"
+description: "This post is in continuation with my NLP blog series"
+---
+
+![Image result for emotions nlp](https://blogs.psychcentral.com/nlp/files/2017/05/understanding-emotions.jpg)
+
+This post is in continuation with my NLP blog series. You might want to checkout my [previous blog](https://shubhanshugupta.com/data-preprocessing-r/) in which I discussed data pre-processing in R. In this blog, I will determine the emotions in Ted Talks. At the end, I will compute a HeatMap of emotions and talks to aid in our visualization.
+
+So, without further ado, let’s dive in!
+
+As I have already discussed detailed data pre-processing steps in my last blog post, I will assume that you have already prepared a Document Term Matrix.
+
+#### **exploring the dataset**
+
+We will begin by importing [General Inquirer Category Listings](http://www.wjh.harvard.edu/~inquirer/homecat.htm) Dataset. The dataset sources word categories from 4 different dictionaries. A particular category houses several words pertaining to the semantic meaning for that category. For example - The “Pleasur” category has words indicating the enjoyment of a feeling, including words indicating confidence, interest and commitment.    
+
+<table><tbody><tr><td><p style="text-align: justify;"><span style="font-weight: 400;">require</span><span style="font-weight: 400;">(</span><span style="font-weight: 400;">"tm.lexicon.GeneralInquirer"</span><span style="font-weight: 400;">)</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">words_with_emotions &lt;- terms_in_General_Inquirer_categories(</span><span style="font-weight: 400;">"EMOT"</span><span style="font-weight: 400;">)</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">words_with_pleasur &lt;- terms_in_General_Inquirer_categories(</span><span style="font-weight: 400;">"Pleasur"</span><span style="font-weight: 400;">)</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">words_with_pain &lt;- terms_in_General_Inquirer_categories(</span><span style="font-weight: 400;">"Pain"</span><span style="font-weight: 400;">)</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">words_with_virtue &lt;- terms_in_General_Inquirer_categories(</span><span style="font-weight: 400;">"Virtue"</span><span style="font-weight: 400;">)</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">words_with_vice &lt;- terms_in_General_Inquirer_categories(</span><span style="font-weight: 400;">"Vice"</span><span style="font-weight: 400;">)</span></p></td></tr></tbody></table>
+
+For determining emotions in Ted Talks, choosing categories is an open-ended task. I picked up categories which I felt would best suit the emotions in this talks. Later, as we’ll see, the heatmap would validate my choices. You can pick up completely different categories for your practice and it would still be fine.
+
+#### **Computing term score**
+
+Next, we are going to compute a score which will signify how many terms in the DTM match with the words present in the categories imported in the step above. We use tm\_term\_score function for this purpose.
+
+<table><tbody><tr><td><span style="font-weight: 400;">emo_score &lt;- tm_term_score(dtm, words_with_emotions)</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">pleasure_score &lt;- tm_term_score(dtm, words_with_pleasur)</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">pain_score &lt;- tm_term_score(dtm, words_with_pain)</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">virtue_score &lt;- tm_term_score(dtm, words_with_virtue)</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">vice_score &lt;- tm_term_score(dtm, words_with_vice)</span></td></tr></tbody></table>
+
+#### **category wise scoring the document**
+
+After computing the score, I am going to prepare a dataframe containing the category score for each document.
+
+<table><tbody><tr><td><span style="font-weight: 400;">library</span><span style="font-weight: 400;">(dplyr)</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">library</span><span style="font-weight: 400;">(tibble)</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">library</span><span style="font-weight: 400;">(tidyr)</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">library</span><span style="font-weight: 400;">(tidytext)</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">library</span><span style="font-weight: 400;">(gplots)</span><span style="font-weight: 400;">doc_emo_df &lt;- tbl_df(emo_score) %&gt;% rownames_to_column %&gt;% rename(document = rowname) %&gt;% rename(emotional = value)</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">doc_pleasure_df &lt;- tbl_df(pleasure_score) %&gt;% rownames_to_column %&gt;% rename(document = rowname) %&gt;% rename(pleasure = value)</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">doc_pain_df &lt;- tbl_df(pain_score) %&gt;% rownames_to_column %&gt;% rename(document = rowname) %&gt;% rename(pain = value)</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">doc_virtue_df &lt;- tbl_df(virtue_score) %&gt;% rownames_to_column %&gt;% rename(document = rowname) %&gt;% rename(virtue = value)</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">doc_vice_df &lt;- tbl_df(vice_score) %&gt;% rownames_to_column %&gt;% rename(document = rowname) %&gt;% rename(vice = value)</span></td></tr></tbody></table>
+
+One such dataframe looks like:
+
+![Document Emotion Score Dataframe](http://new.shubhanshugupta.com/wp-content/uploads/2018/11/Screen-Shot-2018-11-29-at-8.10.23-PM-300x207.png)
+
+Subsequently, I join all the dataframes together by their document number. This results in a single dataframe containing the scores of each category for each document.
+
+<table><tbody><tr><td><span style="font-weight: 400;">library</span><span style="font-weight: 400;">(tidyverse)</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">all_emotions &lt;- list(doc_emo_df, doc_pleasure_df, doc_pain_df, doc_virtue_df, doc_vice_df) %&gt;% reduce(inner_join, by = </span><span style="font-weight: 400;">"document"</span><span style="font-weight: 400;">)</span></td></tr></tbody></table>
+
+This step results in the dataframe that looks like this:
+
+![Document Emotion Score Dataframe](http://new.shubhanshugupta.com/wp-content/uploads/2018/11/Screen-Shot-2018-11-29-at-8.16.39-PM-300x89.png)
+
+#### **VISUALIZATION VIA HEATMAP**
+
+The next step is to make a heatmap for visualization. I use heatmap.2 function in which we need to feed a numeric matrix of the values to be plotted. Therefore, that’s the first step I undertake - converted the dataframe computed above in the matrix form. Subsequently, that matrix was fed into the heatmap.2 function, along with several other parameters. I have commented the description and usage of every parameter in the code below. I learnt the usage of heatmap from [Sebastian Raschka’s blog](https://sebastianraschka.com/Articles/heatmaps_in_r.html).
+
+<table><tbody><tr><td><span style="font-weight: 400;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;"># transform the columns (except document number) into a matrix</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">mat_data &lt;- data.matrix(all_emotions[,</span><span style="font-weight: 400;">2</span><span style="font-weight: 400;">:ncol(all_emotions)]) &nbsp;</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">rownames(mat_data) &lt;- all_emotions[,</span><span style="font-weight: 400;">1</span><span style="font-weight: 400;">][[</span><span style="font-weight: 400;">1</span><span style="font-weight: 400;">]] </span><span style="font-weight: 400;"># assign row names</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">heatmap.2(mat_data,</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp;cellnote = mat_data, &nbsp;</span><span style="font-weight: 400;"># same data set for cell labels</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp;main = </span><span style="font-weight: 400;">"Emotions in Ted Talks"</span><span style="font-weight: 400;">, </span><span style="font-weight: 400;"># heat map title</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp;notecol=</span><span style="font-weight: 400;">"black"</span><span style="font-weight: 400;">, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="font-weight: 400;"># change font color of cell labels to black</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp;density.info=</span><span style="font-weight: 400;">"none"</span><span style="font-weight: 400;">, &nbsp;</span><span style="font-weight: 400;"># turns off density plot inside color legend</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp;trace=</span><span style="font-weight: 400;">"none"</span><span style="font-weight: 400;">, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="font-weight: 400;"># turns off trace lines inside the heat map</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp;margins =c(</span><span style="font-weight: 400;">12</span><span style="font-weight: 400;">,</span><span style="font-weight: 400;">9</span><span style="font-weight: 400;">), &nbsp;&nbsp;&nbsp;&nbsp;</span><span style="font-weight: 400;"># widens margins around plot</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp;col=colorRampPalette(c(</span><span style="font-weight: 400;">"red"</span><span style="font-weight: 400;">, </span><span style="font-weight: 400;">"yellow"</span><span style="font-weight: 400;">, </span><span style="font-weight: 400;">"green"</span><span style="font-weight: 400;">))(n = </span><span style="font-weight: 400;">299</span><span style="font-weight: 400;">), </span><span style="font-weight: 400;"># use on color palette defined earlier</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp;Colv=</span><span style="font-weight: 400;">"NA"</span><span style="font-weight: 400;">, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="font-weight: 400;"># turn off column clustering</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">&nbsp;dendrogram=</span><span style="font-weight: 400;">'none'</span><span style="font-weight: 400;">)</span></td></tr></tbody></table>
+
+The code results in the heatmap below.
+
+![Emotions in Ted Talks](http://new.shubhanshugupta.com/wp-content/uploads/2018/11/Screen-Shot-2018-11-29-at-10.45.52-PM-300x179.png)  
+As you can see in the heatmap above, red color dominates throughout. A clear cut reasoning for that lies in the fact that the DTM is extremely sparse. With 99% sparsity in DTM, the words in the five categories (emotional, pleasure, pain, virtue and vice) could not match the majority of the terms present in our DTM. Small stretches of yellow lines denote the presence of particular emotions - virtue in this case. This means that speakers in their Ted Talks use a lot of words related to virtue in their speeches. The result could be different if you use different category of emotions.
+
+That’s all for now. I will discuss a new task related to NLP in my next blog. So stay tuned.
+
+---
+
+Thanks for reading and I have written other [posts](https://shubhanshugupta.com/blog/) related to software engineering and data science as well. You might want to check them out [here](https://shubhanshugupta.com/blog/). You can also subscribe to my blog to receive relevant blogs straight in your inbox and [reach out](https://shubhanshugupta.com/contact/) to me here. I am also [mentoring](https://shubhanshugupta.com/mentoring-career-data/) in the areas of Data Science, Career and Life in Singapore. You can book an appointment to talk to me.

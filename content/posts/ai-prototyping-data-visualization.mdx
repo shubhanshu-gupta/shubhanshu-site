@@ -1,0 +1,121 @@
+---
+title: "Data Visualization for AI Prototyping: How Product Managers Validate Hypotheses Quickly"
+date: "2025-01-30"
+slug: "ai-prototyping-data-visualization"
+category: "product"
+description: "Namaste 🙏 and welcome to my blog"
+---
+
+Namaste 🙏 and welcome to my blog. I write about product management, data science, and software engineering. For more: [About Me](https://shubhanshugupta.com/) | [Mentoring](https://shubhanshugupta.com/mentoring/) | [Blog](https://shubhanshugupta.com/blog/) | [My Recommendations](https://shubhanshugupta.com/recommendations/)
+
+---
+
+AI started integrating in our daily lives in the form of humble Youtube, Amazon recommendations, to the addictive Instagram and TikTok reels, to chatbots, smart home devices, and so much more. However, AI got a lot more pervasive when companies like OpenAI (ChatGPT), Google (Gemini), Facebook (Llama), Microsoft (Copilot) built LLMs (Large Language Models) which had the capability to generate human-like conversations and enabled us to refine and steer conversations towards the length, format, style, detail, and language, we desired.
+
+The growth of LLMs spawned several more use cases which allowed people to use AI in professional lives as well. So, while discussing the use cases with my fellow product managers, I figured there's a lot of content on which tools to use & for which purpose. However, a lot of content on how to use those tools for niche use cases is still behind paywall.
+
+That's when, I decided to write a multi-part blog series on AI Prototyping where I will pick a tool and share a sample use case using step-by-step guides. The intent is not to overload you with a plethora of state-of-the-art tools, rather the focus will be on enabling you to use AI tools for your daily professional life as a Technical Product or Program Manager. 
+
+![Data Visualization](http://new.shubhanshugupta.com/wp-content/uploads/2025/01/1-300x300.png)
+*Data Visualization for AI Prototyping using Claude for Product Managers*
+
+### Let's start with a simple data visualization using **Claude** chatbot.
+
+I have a CSV containing around 50,000 cross-border transactions with columns such as when was the transaction initiated by the customer, when did the beneficiary receive the funds, the destination & source currency, amount, and fees. There is a derived field, settlement time, based on the timestamp columns in the raw data. It essentially signifies how much time it took for a transaction to settle and the value could be instant, <1 hour, <3 hours, <6 hours, <12 hours, 24-72 hours. 
+
+The full CSV can be accessed via this link: [cross\_border\_transactions\_20250128\_213446](https://docs.google.com/spreadsheets/d/1xLsdrnNyRzy7wmT3BvtaGUTs25K6QoUg7wtrKY-3OuA/edit?usp=sharing)
+
+Sharing a snapshot for your reference:
+
+![](http://new.shubhanshugupta.com/wp-content/uploads/2025/01/Screenshot-2025-01-29-at-4.29.42 PM-1024x233.png)
+*Transaction Data CSV Sample*
+
+Based on the data, let’s try some prompts to generate simple intuitive visualizations of data.
+
+_**“Visualize the top currency corridors based on volume and value”**_
+
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdK8B3ber7p1ciXP3aTs7u4gLa3SW1HOeJLrVzja9TdsGNx40No-tzYFQGHWazFNYMyK726DGbczazyulkuiOCL7TxO4Qh59lmYnxR2Q7eKufxu-cJTZAHOq4X4LibEBMKc_xp8og?key=TYcctIoteH3GRbSDVemvZt7i)
+
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXd5V92q4yVw9unnKErKwyjLA0YxyW2ueZqcn4kJP3VdB2QX0CRKt4JrWGYt1LJFkkvyKNG2rUy7IqmPmHQalMID3aK9LHcGCKjn-xusrCh1xfyrBwCcuLfZHmiFABxKld4RzFjQxg?key=TYcctIoteH3GRbSDVemvZt7i)
+
+Well, I would say Claude did a pretty decent job. You can view the [live interactive version of this visualization](https://claude.site/artifacts/5f13cd73-67d3-40e7-9d2a-03bd26f2b9c8) (it’s a Typescript file that contains React code).
+
+Some Key insights:
+
+-   Major currency pairs (USD-EUR, USD-GBP, EUR-GBP) dominate both volume and value
+-   Some corridors rank differently in value vs. volume (e.g., USD-CHF has higher value ranking than volume ranking)
+-   USD is present in most top corridors, showing its importance as a global currency
+-   Asian currencies (JPY, SGD) show strong presence but with different volume vs. value rankings
+
+Claud also allows you to play around with its output and in fact, gives suggestions as to what you can instruct it to do/modify. That’s pretty cool! However, I would leave that up to your ingenuity when you try it on your own.
+
+Let’s try a few more visualizations with a bit more complexity.
+
+_**“Visualize the % of the settlement times for all the destination currencies”**_
+
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdf-xBj_eRoWGrU0pQc6ndy3YTOpEsl7-17S234xA7cN-wHezm4p2AQr2qqW28W7LzA8MQ03Ma1X8nthWamgrFFPaImvVo40pkqk6hcnqi0IkFOahk1xB5Zw6bYIkwdZ4gQwFqf?key=TYcctIoteH3GRbSDVemvZt7i)
+
+You can view the [live interactive version of this visualization](https://claude.site/artifacts/ab2870ee-9dc0-4acf-8365-23722d4878b4) (it’s a Typescript file that contains React code).
+
+It’s a pretty sophisticated visualization with just 1 line of prompt honestly! It shows the % distribution of the volume of a particular currency based on its settlement time. For example - Major currencies (USD, EUR, GBP) have:
+
+-   Higher percentages of instant settlements (25-30%)
+-   Faster overall settlement times
+-   Lower percentages of 24-72 hour settlements
+
+Whereas, currencies like INR show:
+
+-   Lower instant settlement percentages (10%)
+-   Higher percentages of longer settlement times
+-   More even distribution across the middle categories
+
+Pretty neat!
+
+Now, let’s look at the fee distribution.
+
+_**“Visualize the fee. Transacting in which currency pair costs the most? Is it a safe hypothesis that the fee remains constant for a currency pair or can it be different? Help answer all these questions by visualization.”**_
+
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcEDFhihiEZ3sLPsxjYK7wEl1iUZQOcdhAbH_zzmlu4flfnymI51G30JVJLEkWLO-c8ly1jViCpZDroBPqy4dYtxfojvtVCv3NcS9CvLPOBvBmCqsUbQ-NXy2nmLL-TkS945iEkaA?key=TYcctIoteH3GRbSDVemvZt7i)
+
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeyyhlH1Mr6cvHy-3P251KITfcYk7scQfQkTp5NX3PK5U0f9pmTXIsHjZJhRiKiZrfemGoRR-qG0uLNyn_WOyplmnThXjoEDLWEM2w052PNy8K72dkOmJJVha90xpiTe-WNA-8apA?key=TYcctIoteH3GRbSDVemvZt7i)
+
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcsG7QBvPaR_WblL47U6ts4LFJxQ6m6gtgcn7EJlVpZYwu57IsShgJZ3Tn9xbn2v_6uTBX2Qafq_2tvbq8PvwDChJMBb7UqL1z8iXxvN3ZDr39r8Am7FNYSnMomjAtdT2YmzdMn?key=TYcctIoteH3GRbSDVemvZt7i)
+
+You can view the [live interactive version of this visualization](https://claude.site/artifacts/52b09b20-5234-4324-84bd-b522615a64b7) (it’s a Typescript file that contains React code).
+
+Claude presented several insights to my prompt.
+
+1.  Most Expensive Currency Pairs:
+    -   USD-INR has the highest average fees ($45.2)
+    -   GBP-INR and EUR-IDR follow closely
+    -   Generally, corridors involving emerging market currencies have higher fees
+2.  Least Expensive Currency Pairs:
+    -   EUR-GBP has the lowest average fees ($20.5)
+    -   USD-GBP and USD-EUR also have relatively low fees
+    -   Major currency pairs consistently show lower fees
+3.  Fee Consistency:
+    -   Fees are NOT constant for any currency pair
+    -   There's significant variation between minimum and maximum fees
+    -   Factors affecting fees include:
+        -   Transaction size (larger transactions tend to have higher absolute fees)
+        -   Market conditions
+        -   Time of day/market liquidity
+        -   Payment method
+        -   Correspondent bank relationships
+4.  Fee Structure Insights:
+    -   Base fees exist for all transactions
+    -   Fees scale with transaction size but not linearly
+    -   Major currency pairs have smaller fee ranges
+    -   Emerging market corridors show wider fee ranges
+
+You can also try to modify the fee visualization a bit by asking Claude to
+
+“**_Add additional metrics like fee as a percentage of transaction value_**” OR
+
+“**_Break down the fees into different components (correspondent fees vs. other fees)_**”.
+
+So hopefully you get the gist. A small side note that the transaction data is also generated from Claude. I gave it a crisp prompt and it delivered the CSV exactly how I wanted. The _**prompt**_ was:
+
+**_Generate a csv containing transactions._**
+
+Claud generated the code which I then ran in [JupyterLab](https://jupyter.org/try-jupyter/lab/). My python notebook threw several errors related to package installation errors or other random environment errors. Claude tried its best to fix the errors but what amazed me was its ability to adjust and pivot with every error. Super impressed!

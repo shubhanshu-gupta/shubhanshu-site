@@ -1,0 +1,97 @@
+---
+title: "A Survey of API Management Platforms"
+date: "2019-05-25"
+slug: "a-survey-of-api-management-platforms"
+category: "technical"
+description: "In my previous blog , I discussed how I landed up interning at Dentsu "
+---
+
+In my [previous blog](https://shubhanshugupta.com/internship/), I discussed how I landed up interning at [Dentsu](https://www.dentsuaegisnetwork.com/). I also discussed that I worked on scouting and building a POC for a cloud agnostic, open source API management tool/platform which could help in setting up API design, gateway, store, and analytics. In this blog, I will be jotting down my work in much more detail.
+
+We will be exploring four API Management platforms, namely:
+
+-   [APIGEE](https://cloud.google.com/apigee/)
+-   [POSTMAN](https://www.getpostman.com/)
+-   [APIARY](https://apiary.io/)
+-   [WSO2](https://wso2.com/)
+
+Our main requirements which will help us in evaluating an API Management tool are:
+
+1.  Documenting our APIs 
+2.  Building an API Gateway 
+3.  Securing our APIs  
+4.  Versioning APIs
+
+I explored three platforms which can serve the above-mentioned use cases and we will discuss below our findings for the same. With documentation being our foremost use case, we will focus on the platform which can solve the same, in the most efficient way. 
+
+### **APIGEE** 
+
+![API management](http://new.shubhanshugupta.com/wp-content/uploads/2019/05/image-1.png)
+*Apigee API Management*
+
+It’s an API management platform which gives developers access to manage API calls, throttle traffic, control error handling, cache, build developer portal, etc. 
+
+#### API Documentation 
+
+The platform uses SmartDocs feature to document the APIs. To use Smartdocs, one must build a Developer Services Portal (DSP). One of the most recommended option (by apigee) to build a DSP is to use Drupal. Drupal brings along its Content Management Capabilities and apigee plugs its own batteries like API Products (more on that later), Stats, Developer and Company Apps, etc. to give the DSP a rich set of functionalities.   
+
+Having said all of that, there are quite a few caveats to it. The first and foremost being, building a Drupal based portal. Besides being a tedious task to set it up which also requires a full-fledged hosting service to host the developer portal, it adds a thick layer of friction to our relatively simple use case (documentation of APIs). Another requirement in the developer portal is to build API Products. API Products are nothing but bundled APIs for different services that solve specific use cases. API products deliver API bundles with customizable scopes, environments, authentication, authorization, etc.  
+
+#### Hands-on Experience
+
+Managed to setup the developer portal. Very non intuitive interface to add APIs on their developer portal. Let's take a simple case: I have written a function/class based API and defined its route as well in my code base. I couldn't find anyway to add that endpoint to the API product. Now, it's hard to understand that if I cannot add anything in my API product how will it help me to attach the API product to the developer portal. 
+
+Later, I got a hang of the entire work flow. However there are two caveats (will list them down after writing the workflow).
+
+-   Write Specs (using OpenApi Specification). For this, the API developer must know all the parameters, response codes, and other metadata. If the API changes later on, the spec needs to be changed (manually).
+-   Define API proxy for the spec defined above.
+-   Build an API Product and attach the API Proxy to the product.
+-   Build the Developer Portal and attach the API Product to it. There could be multiple products attached to a portal.
+-   Each stage gives you its own settings to tinker around. For example - you can set the environment (test or prod), throttling limit, developer portal's access limitation (private, internal, public) etc.
+
+The two caveats:
+
+-   The evaluation plan (free plan) gives access to only 1 user and supposedly 1 environment. Hence, only 1 user can build or operate the APIs on the platform. The provision of only 1 environment is also a tad bit dicey. I got two options (prod and test) but not entirely sure about this.
+-   The developer portal is the integrated developer portal given by apigee platform. This means that it comes with a lot less flexibility and fewer features. Foremost being, the URL of our portal will be hosted on apigee and won't be customizable (for ex- [https://shubhanshugupta-eval-peopleportal.apigee.io/](https://shubhanshugupta-eval-peopleportal.apigee.io/)). 
+
+### POSTMAN
+
+![API management](http://new.shubhanshugupta.com/wp-content/uploads/2019/05/image.png)
+*Postman API Management*
+
+Postman is a popular API development environment. It provides an easy interface to design, debug, do automated testing, document, monitor and publish the APIs.  
+
+#### API Documentation 
+
+Just like API Products discussed above, Postman has ‘collections’. A postman collection, allows you to save your requests in such a way that they can be reused, shared and bundled. In order to generate API documentation, one only needs to add some specific (and optional) comments. Postman automatically generates 
+
+-   Sample requests, headers and other metadata 
+-   Descriptions associated with requests, folders and collections 
+-   Generated code snippets in several programming languages 
+
+Postman provides workspaces in which teams can share and collaborate. The documentation of an API collection can be shared within workspaces and can be made open for public consumption or can be limited to internal team.  
+
+## APIARY
+
+Apiary helps in creating a mock API framework wherein we can first design an API and then implement it as well. With Apiary, API design can be mocked – with mock input and output. This mocked API, can then be integrated and tested to meet business use case.  
+
+#### API Documentation 
+
+Apiary gives a provision of API Blueprint. It’s a High-level API description language which helps in its design and documentation. After generating a blueprint of an API, Apiary also gives a provision of a tool called ‘dredd’ which is used to run local tests for validating the blueprint. Like Postman, documentation of APIs in Apiary can be achieved by writing the API description and rest of the details (headers, requests, metadata, etc.) get automatically populated by Apiary. 
+
+## **WSO2 API Manager** 
+
+![API management](https://upload.wikimedia.org/wikipedia/en/thumb/5/56/WSO2_Software_Logo.png/220px-WSO2_Software_Logo.png)
+*WSO2 API Management*
+
+The platform is similar to apigee with lot less burden of understanding the heavy documentation and is quite intuitive to setup as well. Everything good about it except that its trial (or free) plan lasts for only 2 weeks post which we will need to pay (starting from $129/month).
+
+## **Survey Analysis and Results** 
+
+Among these three platforms, I found that Apigee provides an entire spectrum of design, development, gateway, and security for APIs. However, all of this comes with a heavy on-boarding cost and friction, especially when the team has progressed many levels of a software development lifecycle. Also, when the business is not entirely based on selling a product which the customers can access only via APIs, Apigee might be a little more resource intensive especially when the requirement is relatively simpler.  
+
+Apiary and Postman are great platforms, exclusively for API design, development and testing. They provide features like API gateway, and security in collaboration with platforms like AWS. Even with regards to API documentation, Postman provides a more seamless and smooth experience in comparison to Apiary. Developers need to write API blueprints in the case of Apiary in a pre-defined format prescribed by the platform. Whereas, if Postman is already a preferred tool for API development and testing, the documentation process becomes a breeze.  
+
+---
+
+Thanks for reading and I have written other [posts](https://shubhanshugupta.com/blog/) related to software engineering and data science as well. You might want to check them out [here](https://shubhanshugupta.com/blog/). You can also subscribe to my blog to receive updates straight in your inbox.

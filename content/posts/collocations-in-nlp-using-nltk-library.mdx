@@ -1,0 +1,97 @@
+---
+title: "Collocations in NLP using NLTK Library"
+date: "2020-03-16"
+slug: "collocations-in-nlp-using-nltk-library"
+category: "technical"
+description: "Collocations are phrases or expressions containing multiple words, that are highly likely to co-occur"
+---
+
+![Collocation in NLTK](https://miro.medium.com/max/600/1*NlWaoGNvIWWXNxRhQs-moQ.png)
+
+Collocations are phrases or expressions containing multiple words, that are highly likely to co-occur. For example - 'social media', 'school holiday', 'machine learning', 'Universal Studios Singapore', etc.
+
+## Why do you need Collocations?
+
+Imagine, having a requirement wherein you want to understand the text reviews left by your customers. You want to understand the behavioural insights like who are your customers, how many of them visit your place, what are they interested in, what do they buy, what activities do they engage with, etc.
+
+For more simplicity, let's consider that you have a restaurant and you have several thousand reviews. Thus, as a restaurant owner you need to understand the behavioural insights of your customers, as discussed above.
+
+Using Named Entity Recognition, about which I will write soon and link it up here, I extracted certain interesting entities in the PERSON, EVENT, DATE, PRODUCT categories. Such as, 'Saturday' in DATE. I then wanted to find out what people are writing around 'Saturday' in their reviews!
+
+Thus, I narrowed down on several such broad themes such as 'family', 'couple', 'holiday', 'brunch', etc. Collocations helped me in fetching the two or three words that are highly likely to co-occur around these themes. These two or three words that occur together are also known as BiGram and TriGram.
+
+## How is Collocations different than regular BiGrams or TriGrams?
+
+The set of two words that co-occur as BiGrams, and the set of three words that co-occur as TriGrams, may not give us meaningful phrases. For example, the sentence ‘He applied machine learning’ contains bigrams: ‘He applied’, ‘applied machine’, ‘machine learning’. ‘He applied’ and ‘applied machine’ do not mean anything, while ‘machine learning’ is a meaningful bigram. Just considering co-occurring words may not be a good idea, since phrases such as ‘of the’ may co-occur frequently, but are actually not meaningful. Thus, the need for [collocations from NLTK library](http://www.nltk.org/howto/collocations.html). It only gives us the meaningful BiGrams and TriGrams.
+
+## How is one Collocation better than the other?
+
+Oh! So you basically want to know how the scoring works? Well, I used Pointwise Mutual Information or PMI score. Discussing the what's PMI and how is it computed is not the scope of this blog, but here are some great articles which you can read to understand more: [Article 1](https://eranraviv.com/understanding-pointwise-mutual-information-in-statistics/) and [Article 2](https://stats.stackexchange.com/questions/179349/what-are-the-pros-and-cons-of-applying-pointwise-mutual-information-on-a-word-co). I used the PMI scores to quantify and rank the BiGrams, TriGrams churned out by Collocations library.
+
+## How to implement Collocations?
+
+Yeah, I get it! After reading so much around collocations, even I would be thumping on the table (or head) for the actual example. Fret no more!
+
+As I mentioned earlier, I wanted to find out what do people write around certain themes such as some particular dates or events or person. So, from my code you will be able to see BiGrams, TriGrams around specific words. That is, I want to know BiGrams, TriGrams that are highly likely to formulate besides a 'specific word' of my choice. That specific word is nothing but the theme that we got from Named Entity Recognition.
+
+```
+import nltk
+from nltk.collocations import *
+
+bigram_measures = nltk.collocations.BigramAssocMeasures()
+
+# Ngrams with 'creature' as a member
+creature_filter = lambda *w: 'kids' not in w
+
+
+## Bigrams
+finder = BigramCollocationFinder.from_words(
+   filtered_sentences)
+# only bigrams that appear 3+ times
+finder.apply_freq_filter(3)
+# only bigrams that contain 'creature'
+finder.apply_ngram_filter(creature_filter)
+# return the 10 n-grams with the highest PMI
+# print (finder.nbest(bigram_measures.likelihood_ratio, 10))
+for i in finder.score_ngrams(bigram_measures.likelihood_ratio):
+    print (i)
+
+    
+```
+
+![Bigram Collocations
+](http://new.shubhanshugupta.com/wp-content/uploads/2020/03/Screenshot-2020-03-16-at-1.18.01-PM.png)
+*A sample result of the code above*
+
+The result shows that people write about 'kids menu', 'kids running', 'kids meal' in their reviews. Now let's see the TriGrams around 'kids'.
+
+```
+## Trigrams
+trigram_measures = nltk.collocations.TrigramAssocMeasures()
+
+# Ngrams with 'creature' as a member
+creature_filter = lambda *w: 'kids' not in w
+
+
+finder = TrigramCollocationFinder.from_words(
+   filtered_sentences)
+# only trigrams that appear 3+ times
+finder.apply_freq_filter(3)
+# only trigrams that contain 'creature'
+finder.apply_ngram_filter(creature_filter)
+# return the 10 n-grams with the highest PMI
+# print (finder.nbest(trigram_measures.likelihood_ratio, 10))
+for i in finder.score_ngrams(trigram_measures.likelihood_ratio):
+    print (i)
+```
+
+![Trigram collocations](http://new.shubhanshugupta.com/wp-content/uploads/2020/03/Screenshot-2020-03-16-at-1.20.50-PM.png)
+*A sample result of the code above*
+
+The code output gives a deeper insight into the BiGrams we just mined above. So, 'kids menu available' and 'Great kids menu' is an extension of 'kids menu', which shows that people applaud a restaurant for having a kids menu. Similarly, 'kids running' is associated with a negative connotation 'kids running screaming'. That means, the guests in the restaurants are probably not having the best of their time when there are kids running and screaming around.
+
+This wraps up my demo and explanation for application of Collocations in NLP provided by NLTK library. I hope this blog was helpful to you. Please let me know if you used a different approach for scoring or extracting Collocations.
+
+---
+
+Thanks for reading and I have written other [posts](https://shubhanshugupta.com/blog/) related to software engineering and data science as well. You might want to check them out [here](https://shubhanshugupta.com/blog/). You can also subscribe to my blog to receive relevant blogs straight in your inbox. I am also [mentoring](https://shubhanshugupta.com/mentoring-career-data/) in the areas of Data Science, Career and Life in Singapore. You can book an appointment to talk to me. [![Book an appointment with Shubhanshu Gupta using SetMore](https://my.setmore.com/webapp/images/bookappt/SetMore-book-button.png)](https://my.setmore.com/bookanappointmentv3.do?uniqueKey=492d7652-e05a-4521-89d7-26b66412cb72)

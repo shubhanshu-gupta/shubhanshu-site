@@ -1,0 +1,72 @@
+---
+title: "Driving Revenue Growth: How to Estimate Projected Revenue for New Features"
+date: "2023-02-26"
+slug: "how-to-estimate-revenue-for-new-features"
+category: "product"
+description: "As a Product Manager, I am responsible for estimating the revenue for the features and capabilities that I propose to be built"
+---
+
+As a Product Manager, I am responsible for estimating the revenue for the features and capabilities that I propose to be built. Over the last several months, I have been doing revenue estimation for the features and capabilities that I own in the app. I even talked about it in [my last blog](https://shubhanshugupta.com/3-months-of-product-management-7-learnings/#2-projects-estimations-and-forecasts) how I had to build up a hypothesis, estimate revenue to project the value of the feature, when I had recently joined as a product manager. In this blog, I will be talking about how I went from idea to an impact stage, and an actual example on how to estimate projected revenue for a new feature. So let's dive in!
+
+![Revenue for your feature](http://new.shubhanshugupta.com/wp-content/uploads/2023/02/money-photo-for-blog.jpeg)
+*Show Revenue*
+
+## Brief context: The need for the feature
+
+Traditionally as a company we would simply send the maximum permissible marketing messages (SMS or Email) to customers. There would be a (crude) rule based logic to prioritize certain product offers over others in a day. In short, there was no data driven approach to it. Hence, I had just done a pilot in Hong Kong, wherein we would send the top X number of communications (where X is the maximum permissible messages/market) based on their rank generated from a recommendation model which used customer's transactional and product holding data. It solved two problems in one shot:
+
+1.  Because the feature was powered by the recommendation model, there was no room for bias (and human judgement) when manually choosing the offer to be sent to the customers.
+2.  Only the most relevant offers would be sent to the customers, which in turn helped in lifting up the product uptake.
+
+However, there was a massive financial scam in south-east asia region and the scamsters impersonated banks/fintechs and duped people for millions of dollars by sending fishing SMSes and Emails. As a result, governments banned financial institutions from sending any marketing SMS/Email which contains links. Hence, I had to **improvise my feature overnight**!
+
+## So what's the resolution?
+
+While the stop-gap solution was to remove links from all the communications and improve the marketing message to nudge people to visit the bank's promotional page on the website or app, by themselves! Any product manager reading this blog would be able to instantly relate how difficult it is to make customers do the work that increases friction! Even if somebody takes the pain to go all the way to the website or the app, finds the particular offer, and avails it - how would I attribute it to my marketing effort?!
+
+## Action plan!
+
+Hence, the solution was to send marketing communications using push notifications with deep links, that would take the customer directly to the offer page. Not a novel feature per se, but definitely the one that could prove to be a life saver for the bank. That's when I prepared a strategy to enhance the existing feature to include push notifications with deep links, estimated revenue for this capability to seek buy-in. I would write a separate blog detailing my experience of drawing the entire strategy from ideation, building hypothesis, revenue and effort estimation, to aligning stakeholders and getting the buy-in. For now, let's just focus on revenue estimation.
+
+### Revenue Estimate
+
+For this exercise, I am considering that I am going to launch this feature in 4 markets (SG, HK, UK and UAE). Hence, I am assuming the total number of estimated **users who have installed** and are active on **mobile app are 2M**. The breakdown is:
+
+A few more assumptions:
+
+Now I will be considering 2 types of revenue streams. First is the **revenue from marketing campaigns** which involve up or cross selling products. Second is the **revenue from servicing campaigns** like nudging drop off customers to complete applications, payment reminders, pay with points, convert points to miles, etc.
+
+###### Common Assumption for both marketing and servicing campaigns
+
+1.  Customer Acquisition Cost is not considered
+2.  Considering 20 products on the shelf, I have assumed that a **customer engages with only 2 products/quarter**. **Real life example of marketing campaign** - I might take up a Credit Card offer nudging me to spend $5K for a $50 cashback, and another offer on a product which nudges me to pay my rent and utilities in exchange for a $10 voucher. Real life example of servicing campaign - I forgot to pay my credit card due amount and the bank runs a campaign nudging the customer to pay the amount, or I book flight tickets from my credit card points - in both the examples I would have to pay a flat fee.
+3.  Considered 4 markets: SG, HK, UK, UAE
+
+###### Assumptions specific to marketing campaigns
+
+1.  Estimated revenue per customer per product is considered to be $50
+2.  A market runs only 5 campaigns/quarter (a lot more campaigns are active in reality but not everyone is eligible for all campaigns, hence I have chosen a relatively modest number) - I have not taken the #campaigns in calculation because it's not necessary that product & campaign have 1:1 mapping. I can target a customer with multiple campaigns for the same product. Hence, I have only considered that a customer engages with 2 products/quarter = 8 products/year
+
+###### Assumptions specific to servicing campaigns
+
+1.  Estimated revenue from servicing campaigns is considered to be $100.
+2.  Personalized, timely push notifications that nudges customers to complete applications bring in higher revenue. I have considered finance charges, late fees, flat fees on converting points to miles as other sources of revenue under servicing campaigns.
+3.  No cap on number of campaigns. For ex - I can have push notifications past my bill pay due date reminding me to clear my dues every month.
+
+###### Total Revenue
+
+Using the formula: Total app installs \* CTR \* Conversion Rate \* Estimated revenue per customer per product \* Number of products a customer engages per quarter in an year
+
+For marketing campaigns, the total revenue comes out to be: 2M\*0.04\*0.01\*50\*8 = 320K
+
+For servicing campaigns, the the total revenue comes out to be: 2M\*0.04\*0.01\*100\*8 = 640K
+
+**The total estimated revenue per year, all 4 markets combined, for 2M app users, comes around to be ~$960K**.
+
+## Final Remark!
+
+There are a lot of variables, constraints, and levers that you can use when coming up with your revenue estimation. The calculation that you have seen above is just my take on the specific feature, and it's entirely possible that you could come up with a totally different number. But if you have read all the way until here, **thank you**! Please do share if you used different assumptions, logic to come up with a number for a similar use case.
+
+---
+
+Do check out the other [posts](https://shubhanshugupta.com/blog/)  that I have written related to product management, data science, and software engineering. Please consider subscribing to my blog and feel absolutely free to [reach out](https://shubhanshugupta.com/contact/).

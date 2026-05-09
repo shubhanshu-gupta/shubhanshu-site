@@ -1,0 +1,68 @@
+---
+title: "Become a Web Analytics Ninja: Analyze Bounce Rate Across Different Visitor Segments"
+date: "2020-06-14"
+slug: "analyze-bounce-rate-across-different-visitor-segments"
+category: "personal"
+description: "Web Analytics This post is a digression from the other data science blogs that I have written in the past and more so, from the work that I do in my day-to-day "
+---
+
+![Web analytics](https://mediaonemarketing.com.sg/wp-content/uploads/2019/01/web-analytics-II_nkwmlb.png)
+*Web Analytics*
+
+This post is a digression from the other data science [blogs](https://shubhanshugupta.com/collocations-in-nlp-using-nltk-library/) that I have written in the past and more so, from the work that I do in my day-to-day job. Well, I don't mean digression in a negative connotation. I enjoyed and learnt so much that I implemented many of the strategies in my own website. In this post, I will be discussing how I did a deep dive on a 1 liner problem statement by my client, "_The bounce rate has gone up since last few months from what it was before, Why?_" That may seem trivial to investigate and analyze, but the lack of details and granularity, made the problem statement very broad and open ended. Not enough clarity also makes it pretty easy to hit a roadblock very early in the process, especially when you don't know where to start. _फ़िक्र न करें_ (Fear not)! You will see a structured way to approach such kind of problem statement.
+
+## Bounce Rate
+
+![What Does Bounce Rate Mean for SEO - SEO Hermit](https://www.seohermit.com/wp-content/uploads/what-bounce-rate-means-for-seo-strategy.png)
+*What does bounce rate mean for you?*
+
+It's a mystical metric! Although different analysts have their own definitions and their own way of measuring bounce rate, simply said and understood, it is the proportion of people who land at your website and leave immediately. I will write in very brief of what other variations of bounce rates you can implement, depending upon your own use case:
+
+-   **_Scroll depth_**: Percentage of people who are scrolling 25, 50, 75, 100% of the web page.
+-   **_Time spent_**: Percentage of people who spend 5 seconds or less on your webpage.
+
+The metric remains the same, but you can tweak the definition of bounce rate based on what matters to you or your stakeholders.
+
+## Carve out Visitor Segments
+
+After zeroing down on my definition of bounce rate, I carved out the visitor segments that were of interest. Believe me, your analysis will not be as comprehensible as it would be, when you do it for a well defined visitor segment. Segmentation gives you an opportunity to focus on groups of people who depict certain behavioral traits.
+
+The segments that I created for my use case were:
+
+![Visitor Segment](http://new.shubhanshugupta.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-14-at-3.47.09-PM-1024x346.png)
+*Visitor Segment*
+
+A **Browser** is someone who has a [Page Depth](https://www.webopedia.com/TERM/A/average_page_depth_analytics.html) of 3 or less (pages seen during a single session). **Flirt** is someone who has a Page Depth of 1 or less than 1 and has scrolled only 25% of the page. **Loyalist** is someone who has a Page Depth of 3 or less and has scrolled 100% of the page.
+
+## Bounce Rate per Traffic Channel per Visitor Segment
+
+![Bounce Rate per Traffic Channel per Visitor Segment](http://new.shubhanshugupta.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-14-at-4.12.57-PM-1024x427.png)
+*Bounce Rate of every visitor segment per traffic channel*
+
+On digging up further, I analyzed the bounce rate of every visitor segment per traffic channel. I observed that, loyalists had the lowest bounce rate and they explored the website the most when they came via _Referral_ and the least via _Display_.
+
+## Bounce Rate per Landing Page per Visitor Segment
+
+![Bounce Rate per Landing Page per Visitor Segment](http://new.shubhanshugupta.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-14-at-4.17.08-PM-1024x336.png)
+*Bounce rate of every visitor segment per landing page*
+
+Subsequently, I analyzed the bounce rate of every visitor segment per landing page. I have masked the actual page names with Page 1, 2, 3, etc., for obvious reasons (client data sensitivity). I observed that, Loyalists and Browsers explored the website the most when they landed on the Home Page. In general, when a user lands on a Home Page, there's a high possibility that the user will continue to explore and won't bounce off immediately.
+
+## How Often a Webpage is a Landing Page?
+
+![Analysis of how often a webpage is acts as a landing page for the visitors. ](http://new.shubhanshugupta.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-14-at-4.22.30-PM-1024x390.png)
+*Analysis of how often a webpage is acts as a landing page for the visitors.*
+
+Next up, I analyzed bounce rate per web page and how often that web page acts as a landing page for the visitors. The latter part is measured by a metric "_Entrance/Page Views_". This analysis showed that for Loyalists and Browsers, Home Page holds the highest value in terms of loyalty and stickiness.
+
+You can similarly measure bounce rate across different verticals for every visitor segment. Those verticals could be campaigns, search queries, browser, mobile, etc.
+
+I did one such off-beat analysis, wherein I found that Android users experience a higher page load time. Among visitor segments, Flirts experience a page load time of 1.5-2 secs higher than the average and 75% of the Flirts visit the website via Mobile and about 38% of them are Android users. You see! What just happened here? A large chunk of visitors might be dropping off because of bad user experience and are therefore being classified as Flirts. Sometimes you get to see such unconventional insights which blows yours and the clients' mind off!
+
+Overall, it's quite explicit that bringing down the percentage of Flirts will reduce the overall bounce rate, will improve audience quality and will eventually lead to a better ROI on marketing spend.
+
+What visitor segments did you create? What did you define as your bounce rate? I would love to know your feedback and if this blog helped you inn framing your web analytics strategy in any way.
+
+---
+
+If you have read all the way until here, thank you! But before you close the tab, I request you to become a _Loyalist_ for my [website](https://shubhanshugupta.com/) and check out the other [posts](https://shubhanshugupta.com/blog/)  that I have written related to software engineering and data science. Please consider subscribing to my blog and feel absolutely free to [reach out](https://shubhanshugupta.com/contact/). I am also [mentoring](https://shubhanshugupta.com/mentoring-career-data/) in the areas of Data Science, Career and Life in Singapore. You can book an appointment to talk to me. [![Book an appointment with Shubhanshu Gupta using SetMore](https://my.setmore.com/webapp/images/bookappt/SetMore-book-button.png)](https://my.setmore.com/bookanappointmentv3.do?uniqueKey=492d7652-e05a-4521-89d7-26b66412cb72)
