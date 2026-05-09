@@ -6,9 +6,6 @@ category: "technical"
 description: "Pandas Library Data cleaning is an essential step to prepare your data for the analysis"
 ---
 
-![pandas](/images/posts/speed-up-apply-function-pandas-dataframe/image.png)
-*Pandas Library*
-
 Data cleaning is an essential step to prepare your data for the analysis. While cleaning the data, every now and then, there's a need to create a new column in the Pandas dataframe. It's usually conditioned on a function which manipulates an existing column. A strategic way to achieve that is by using Apply function. I want to address a couple of bottlenecks here:
 
 -   **Pandas**: The Pandas library runs on a single thread and it doesn't parallelize the task. Thus, if you are doing lots of computation or data manipulation on your Pandas dataframe, it can be pretty slow and can quickly become a bottleneck.
