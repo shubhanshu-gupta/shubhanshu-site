@@ -1,15 +1,16 @@
 import AnimateIn from "./AnimateIn";
 
+// CHANGE 10A: removed Talk/Teaching entry; CHANGE 10B: updated patent
 const RESEARCH_ITEMS = [
   {
     type: "Patent",
     typeColor: "bg-copper-100 text-copper-700",
-    title: "Machine Learning Tool for Financial Data Analysis",
-    venue: "USPTO Application #17476388 · Also filed in Singapore",
-    year: "Filed 2021",
+    title: "Machine Learning Modeling to Identify Sensitive Data",
+    venue: "USPTO · US-20260119715-A1 · Also filed in Singapore",
+    year: "Granted May 2024",
     detail:
-      "Filed as lead inventor while leading the AI/ML Centre of Excellence at Citibank. The patent covers an ML-based approach to financial data pattern detection and anomaly identification.",
-    link: "https://patentcenter.uspto.gov/applications/17476388",
+      "Filed as lead inventor while leading the AI/ML Centre of Excellence at Citibank. Covers a probabilistic ML + NLP-based framework for detecting and classifying PII sensitivity in enterprise data pipelines. The patented system is currently expanding across all Citi markets worldwide, integrating seamlessly into Citi's data pipelines to uphold data governance and integrity.",
+    link: "https://ppubs.uspto.gov/api/pdf/downloadPdf/20260119715",
     linkLabel: "View on USPTO",
   },
   {
@@ -34,16 +35,29 @@ const RESEARCH_ITEMS = [
     link: "https://arxiv.org/abs/1702.07651",
     linkLabel: "View on arXiv",
   },
+];
+
+// CHANGE 10C: Speaking & Teaching cards
+const SPEAKING_ITEMS = [
   {
-    type: "Talk / Teaching",
+    type: "Interview",
+    typeColor: "bg-cream-100 text-ink-700",
+    title: "Navigating Autonomy at the Workplace",
+    venue: "Recorded interview · YouTube",
+    detail:
+      "A candid conversation on professional life — specifically on how to operate with autonomy, own decisions, and maintain direction in large organisations. Originally recorded as part of a blog feature.",
+    link: "https://www.youtube.com/watch?v=F5qP3brApQc",
+    linkLabel: "Watch on YouTube",
+  },
+  {
+    type: "YouTube Series",
     typeColor: "bg-cream-100 text-ink-700",
     title: "AI Prototyping for Product Managers",
-    venue: "YouTube · shubhanshugupta.com/ai-prototyping",
-    year: "Ongoing",
+    venue: "YouTube playlist",
     detail:
-      "A series on using AI tools for rapid hypothesis validation — covering data visualisation, prototyping, and the PM's role in AI product development.",
-    link: "https://shubhanshugupta.com/ai-prototyping/",
-    linkLabel: "View series",
+      "A series of recordings covering how product managers can apply AI tools for rapid hypothesis validation, data visualisation, and lightweight prototyping.",
+    link: "https://www.youtube.com/playlist?list=PLUFVOl7WhQovfwvTaNRraW_Ox0iCZ0IbN",
+    linkLabel: "View playlist",
   },
 ];
 
@@ -51,14 +65,15 @@ export default function Research() {
   return (
     <section id="research" className="bg-cream-50 py-28 md:py-36">
       <div className="max-w-site mx-auto px-6">
+        {/* CHANGE 9: updated headline + subparagraph */}
         <AnimateIn>
           <p className="section-label mb-4">03 · Research &amp; IP</p>
           <h2 className="font-display text-4xl md:text-5xl font-semibold text-ink-900 ruled-heading mb-6">
-            Ideas that made it<br className="hidden md:block" /> to peer review
+            Research, patents &amp;<br className="hidden md:block" /> intellectual output
           </h2>
           <p className="text-ink-500 text-lg leading-relaxed max-w-2xl mb-16">
-            A patent, two peer-reviewed publications, and a body of applied AI teaching work.
-            The technical foundation that informs how I think about product.
+            A USPTO patent, two peer-reviewed publications at international conferences,
+            and a track record of turning research into shipped product.
           </p>
         </AnimateIn>
 
@@ -103,7 +118,7 @@ export default function Research() {
         <AnimateIn delay={100}>
           <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
-              { number: "1", label: "Patent filed" },
+              { number: "1", label: "USPTO patent" },
               { number: "2", label: "Peer-reviewed papers" },
               { number: "2", label: "International conferences" },
               { number: "9+", label: "Years of PM experience" },
@@ -117,6 +132,50 @@ export default function Research() {
             ))}
           </div>
         </AnimateIn>
+
+        {/* CHANGE 10C: Speaking & Teaching sub-section */}
+        <AnimateIn>
+          <h3 className="font-display font-semibold text-2xl text-ink-900 mb-6 mt-14">
+            Speaking &amp; Teaching
+          </h3>
+        </AnimateIn>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {SPEAKING_ITEMS.map((item, i) => (
+            <AnimateIn key={item.title} delay={i * 80}>
+              <div className="p-7 rounded-2xl bg-white border border-cream-200 card-lift flex flex-col h-full">
+                <div className="flex flex-wrap items-start gap-4 justify-between mb-auto">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className={`text-xs font-mono px-2.5 py-1 rounded-full font-medium ${item.typeColor}`}>
+                        {item.type}
+                      </span>
+                    </div>
+                    <h3 className="font-display font-semibold text-xl text-ink-900 mb-1">
+                      {item.title}
+                    </h3>
+                    <p className="text-xs font-mono text-ink-300 tracking-wide mb-3">
+                      {item.venue}
+                    </p>
+                    <p className="text-sm text-ink-500 leading-relaxed">{item.detail}</p>
+                  </div>
+                </div>
+                <div className="mt-5">
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-xs font-medium text-copper-500 hover:text-copper-700 border border-copper-200 hover:border-copper-500 px-4 py-2 rounded-full transition-all duration-200"
+                  >
+                    {item.linkLabel}
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                      <path d="M2 10L10 2M10 2H5M10 2V7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </AnimateIn>
+          ))}
+        </div>
       </div>
     </section>
   );

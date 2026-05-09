@@ -1,49 +1,87 @@
 import AnimateIn from "./AnimateIn";
 
+// CHANGE 12: refined SVG illustrations + updated copy + additional links
 const TILES = [
   {
     icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path d="M12 3L4 7v5c0 5.25 3.5 10.15 8 11.35C16.5 22.15 20 17.25 20 12V7l-8-4z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
-        <path d="M9 12l2 2 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      // Teaching: chalkboard/screen with circuit symbol
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <rect x="6" y="8" width="36" height="26" rx="2" stroke="#1A1916" strokeWidth="1.2" />
+        <line x1="14" y1="34" x2="12" y2="42" stroke="#1A1916" strokeWidth="1.2" strokeLinecap="round" />
+        <line x1="34" y1="34" x2="36" y2="42" stroke="#1A1916" strokeWidth="1.2" strokeLinecap="round" />
+        <line x1="10" y1="42" x2="38" y2="42" stroke="#1A1916" strokeWidth="1.2" strokeLinecap="round" />
+        {/* Circuit symbol */}
+        <circle cx="24" cy="21" r="5" stroke="#C87D36" strokeWidth="1.2" />
+        <line x1="24" y1="13" x2="24" y2="16" stroke="#C87D36" strokeWidth="1.2" strokeLinecap="round" />
+        <line x1="24" y1="26" x2="24" y2="29" stroke="#C87D36" strokeWidth="1.2" strokeLinecap="round" />
+        <line x1="16" y1="21" x2="19" y2="21" stroke="#C87D36" strokeWidth="1.2" strokeLinecap="round" />
+        <line x1="29" y1="21" x2="32" y2="21" stroke="#C87D36" strokeWidth="1.2" strokeLinecap="round" />
       </svg>
     ),
     title: "Teaching",
-    body: "Volunteer tutor with Code in the Community (Saturday Kids × Google). Founded and ran my own computer science Scratch bootcamp. Teaching is how I think — explaining something clearly is the test of whether I actually understand it.",
-    link: { label: "About the bootcamp", url: "https://shubhanshugupta.com/scratch-bootcamp/" },
+    body: "Volunteer tutor with Code in the Community (Saturday Kids × Google). Founded and ran my own computer science Scratch bootcamp — turning a library corner into a classroom for 8–10 year olds who'd never written a line of code. Teaching is how I think: if I can't explain it simply, I don't understand it well enough.",
+    links: [
+      { label: "About the bootcamp", url: "/blog/scratch-bootcamp" },
+      { label: "View the YouTube series →", url: "https://www.youtube.com/playlist?list=PLUFVOl7WhQovfwvTaNRraW_Ox0iCZ0IbN" },
+    ],
   },
   {
     icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-        <circle cx="9" cy="7" r="4" stroke="currentColor" strokeWidth="1.5"/>
-        <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      // Mentoring: two overlapping speech bubbles
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <rect x="6" y="8" width="26" height="18" rx="4" stroke="#1A1916" strokeWidth="1.2" />
+        <path d="M10 26l-3 5 7-3" stroke="#1A1916" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+        <rect x="16" y="20" width="26" height="18" rx="4" stroke="#C87D36" strokeWidth="1.2" />
+        <path d="M38 38l3 5-7-3" stroke="#C87D36" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
     title: "Mentoring",
     body: "I mentor students and early-career professionals on career progression, university applications, life in Singapore, and transitioning into product. Open booking via Setmore — no cost, no agenda.",
-    link: { label: "Book a session", url: "https://shubhanshugupta.setmore.com" },
+    links: [
+      { label: "Book a session", url: "https://shubhanshugupta.setmore.com" },
+      // TODO: replace with exact mentoring blog URL
+      { label: "Read about my mentoring experience →", url: "/blog/evaluating-effectiveness-of-mentorship" },
+    ],
   },
   {
     icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path d="M3 12h18M3 6h18M3 18h12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      // Books: open book with bookmark
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <path d="M24 38V12" stroke="#1A1916" strokeWidth="1.2" strokeLinecap="round" />
+        <path d="M24 12C24 12 16 8 8 10v26c8-2 16 2 16 2" stroke="#1A1916" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M24 12C24 12 32 8 40 10v26c-8-2-16 2-16 2" stroke="#1A1916" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+        {/* Bookmark */}
+        <path d="M34 8v12l-3-3-3 3V8h6z" stroke="#C87D36" strokeWidth="1.2" strokeLinejoin="round" />
       </svg>
     ),
     title: "Books",
     body: "Currently reading across startup war stories, macroeconomics, and financial history. Recent reads include The Hard Thing About Hard Things and The Money Trap — both essential for anyone building or working inside financial infrastructure.",
-    link: { label: "See my list", url: "https://shubhanshugupta.com/books/" },
+    links: [
+      { label: "See my reading notes", url: "/blog?category=books" },
+    ],
   },
   {
     icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5"/>
-        <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke="currentColor" strokeWidth="1.5"/>
+      // Food & Travel: compass rose
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <circle cx="24" cy="24" r="16" stroke="#1A1916" strokeWidth="1.2" />
+        <circle cx="24" cy="24" r="2" stroke="#C87D36" strokeWidth="1.2" />
+        {/* N arrow */}
+        <path d="M24 8v8" stroke="#C87D36" strokeWidth="1.2" strokeLinecap="round" />
+        <path d="M21 12l3-4 3 4" stroke="#C87D36" strokeWidth="1.2" strokeLinejoin="round" />
+        {/* S */}
+        <path d="M24 40v-8" stroke="#1A1916" strokeWidth="1.2" strokeLinecap="round" />
+        {/* E */}
+        <path d="M40 24h-8" stroke="#1A1916" strokeWidth="1.2" strokeLinecap="round" />
+        {/* W */}
+        <path d="M8 24h8" stroke="#1A1916" strokeWidth="1.2" strokeLinecap="round" />
       </svg>
     ),
     title: "Food & Travel",
-    body: "Singapore-based but frequently on the move across Asia. An appreciation for Japanese baking culture led to one particularly memorable souffle cheesecake in Osaka. Food is how I experience places — not restaurants so much as the specific thing a place does that nowhere else does.",
-    link: { label: "Food notes", url: "https://shubhanshugupta.com/food/" },
+    body: "Singapore-based, frequently across Asia. An appreciation for craft food culture led to one particularly memorable soufflé cheesecake in Osaka — the kind that only that specific counter, in that specific basement, does. Food is how I understand places. Not restaurants so much as the specific thing a city has decided to be very serious about.",
+    links: [
+      { label: "Food notes", url: "/blog?category=food" },
+    ],
   },
 ];
 
@@ -67,26 +105,29 @@ export default function Personal() {
           {TILES.map((tile, i) => (
             <AnimateIn key={tile.title} delay={i * 80}>
               <div className="p-7 rounded-2xl bg-white border border-cream-200 card-lift flex flex-col h-full">
-                <div className="w-10 h-10 rounded-xl bg-cream-100 flex items-center justify-center text-ink-700 mb-5">
-                  {tile.icon}
-                </div>
+                <div className="mb-5">{tile.icon}</div>
                 <h3 className="font-display font-semibold text-xl text-ink-900 mb-3">
                   {tile.title}
                 </h3>
                 <p className="text-sm text-ink-500 leading-relaxed flex-1 mb-5">
                   {tile.body}
                 </p>
-                <a
-                  href={tile.link.url}
-                  target={tile.link.url.startsWith("http") ? "_blank" : undefined}
-                  rel={tile.link.url.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="inline-flex items-center gap-1.5 text-sm font-medium text-copper-500 hover:text-copper-700 transition-colors"
-                >
-                  {tile.link.label}
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                    <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </a>
+                <div className="flex flex-col gap-2">
+                  {tile.links.map((link) => (
+                    <a
+                      key={link.label}
+                      href={link.url}
+                      target={link.url.startsWith("http") ? "_blank" : undefined}
+                      rel={link.url.startsWith("http") ? "noopener noreferrer" : undefined}
+                      className="inline-flex items-center gap-1.5 text-sm font-medium text-copper-500 hover:text-copper-700 transition-colors"
+                    >
+                      {link.label}
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                        <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </a>
+                  ))}
+                </div>
               </div>
             </AnimateIn>
           ))}

@@ -34,9 +34,9 @@ export default function Hero() {
           </span>
         </h1>
 
-        {/* Title row */}
+        {/* Title row — CHANGE 1: added NUS Alum */}
         <p className="font-mono text-xs text-copper-500 tracking-[0.2em] uppercase mb-10">
-          VP, Product Management &nbsp;·&nbsp; Citibank &nbsp;·&nbsp; Singapore
+          VP, Product Management &nbsp;·&nbsp; Citibank &nbsp;·&nbsp; NUS Alum &nbsp;·&nbsp; Singapore
         </p>
 
         {/* UVP */}
@@ -80,8 +80,8 @@ export default function Hero() {
           </a>
         </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-10 left-6 md:left-1/2 md:-translate-x-1/2">
+        {/* Scroll indicator — CHANGE 2: moved to bottom-right */}
+        <div className="absolute bottom-10 right-6">
           <div className="flex flex-col items-center gap-2 opacity-30">
             <span className="text-white text-[10px] font-mono tracking-widest uppercase">Scroll</span>
             <svg width="1" height="40" viewBox="0 0 1 40" fill="none">
