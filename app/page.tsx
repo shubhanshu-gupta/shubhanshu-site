@@ -6,8 +6,11 @@ import Research from "@/components/Research";
 import Writing from "@/components/Writing";
 import Personal from "@/components/Personal";
 import { OpenCTA, Footer } from "@/components/CtaAndFooter";
+import { getAllPosts } from "@/lib/posts";
 
 export default function Home() {
+  const recentPosts = getAllPosts().slice(0, 4);
+
   return (
     <>
       <Nav />
@@ -16,7 +19,7 @@ export default function Home() {
         <Work />
         <Build />
         <Research />
-        <Writing />
+        <Writing recentPosts={recentPosts} />
         <Personal />
         <OpenCTA />
       </main>
