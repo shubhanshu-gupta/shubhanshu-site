@@ -39,14 +39,14 @@ Synthetic data is intelligently generated artificial data that resembles the sha
 
 To show how SMOTE works, suppose we have an imbalanced two-dimensional dataset, such as the one in the next image, and we want to use SMOTE to create new data points.
 
-![An imbalanced dataset example](http://new.shubhanshugupta.com/wp-content/uploads/2019/10/imbalance-dataset.jpg)
+![An imbalanced dataset example](/images/posts/handling-imbalanced-datasets-with-smote-in-python/imbalance-dataset.jpg)
 *An imbalanced dataset*
 
 For each observation that belongs to the under-represented class, the algorithm gets its K-nearest-neighbors and synthesizes a new instance of the minority label at a random location in the line between the current observation and its nearest neighbor. 
 
 In our example (shown in the next image), the blue encircled dot is the current observation, the blue non-encircled dot is its nearest neighbor, and the green dot is the synthetic one.
 
-![Example of how SMOTE generates a new synthetic data point](http://new.shubhanshugupta.com/wp-content/uploads/2019/10/SMOTEs-new-synthetic-data-point.jpg)
+![Example of how SMOTE generates a new synthetic data point](/images/posts/handling-imbalanced-datasets-with-smote-in-python/SMOTEs-new-synthetic-data-point.jpg)
 *SMOTE's new synthetic data point*
 
 ## SMOTE tutorial using imbalanced-learn
@@ -99,7 +99,7 @@ df.columns = ['feature_1', 'feature_2', 'label']
 df.to_csv('df_base.csv', index=False, encoding='utf-8')
 ```
 
-![A balanced dataset](http://new.shubhanshugupta.com/wp-content/uploads/2019/10/balanced-dataset.jpg)
+![A balanced dataset](/images/posts/handling-imbalanced-datasets-with-smote-in-python/balanced-dataset.jpg)
 *A Balanced Dataset*
 
 As you can see in the previous image, our balanced dataset looks tidy and well defined. So, if we fit an SVM model with this data (code below), how will the decision boundary look?
@@ -157,7 +157,7 @@ clf = train_SVM(df)
 plot_svm_boundary(clf, df, 'Decision Boundary of SVM trained with 
 ```
 
-![Decision boundary of SVM with balanced dataset](http://new.shubhanshugupta.com/wp-content/uploads/2019/10/SVM-Trained-balanced-dataset.jpg)
+![Decision boundary of SVM with balanced dataset](/images/posts/handling-imbalanced-datasets-with-smote-in-python/SVM-Trained-balanced-dataset.jpg)
 *Blue dots on the blue side and red dots on the red side means that the model was able to find a function that separates the classes*
 
 The image above presents the hyperplane of the base model. On it, we can observe how clear the separation between our classes is. However, what would happen if we imbalance our dataset? How would the decision boundary look? Before doing so, let’s imbalance the dataset by calling the function [make\_imbalance](https://imbalanced-learn.readthedocs.io/en/stable/generated/imblearn.datasets.make_imbalance.html) from the package, **imbalanced-learn**.
@@ -183,7 +183,7 @@ df.to_csv('df_imbalanced.csv', index=False, encoding='utf-8')
 
 This is how the imbalanced dataset looks:
 
-![An imbalanced dataset](http://new.shubhanshugupta.com/wp-content/uploads/2019/10/heavily-imbalanced-dataset.jpg)
+![An imbalanced dataset](/images/posts/handling-imbalanced-datasets-with-smote-in-python/heavily-imbalanced-dataset.jpg)
 *A heavily imbalanced dataset; 10 data points might not be enough for the model*
 
 Quite different, right? Now that we have a very, very, imbalanced dataset, let’s train a second SVM and compare the decision boundary.
@@ -192,7 +192,7 @@ Quite different, right? Now that we have a very, very, imbalanced dataset, let�
 df = pd.read_csv('df_imbalanced.csv', encoding='utf-8', engine='python') clf = train_SVM(df) plot_svm_boundary(clf, df, 'Decision Boundary of SVM trained with an imbalanced dataset')
 ```
 
-![decision boundary of SVM](http://new.shubhanshugupta.com/wp-content/uploads/2019/10/SVM-Decision-boundary.jpg)
+![decision boundary of SVM](/images/posts/handling-imbalanced-datasets-with-smote-in-python/SVM-Decision-boundary.jpg)
 *Just blue.*
 
 No decision boundary at all. By creating an over-the-top imbalanced dataset, we were able to fit an SVM that shows no decision boundary. In other words, the algorithm was not able to learn from its minority data because its decision function sided with the class that has the larger number of samples.
@@ -236,7 +236,7 @@ df.to_csv('df_smoted.csv', index=False, encoding='utf-8')
 
 The following image displays the resulting dataset.
 
-![data set balanced with smote'd data](http://new.shubhanshugupta.com/wp-content/uploads/2019/10/SMOTE-enhanced-dataset.jpg)
+![data set balanced with smote'd data](/images/posts/handling-imbalanced-datasets-with-smote-in-python/SMOTE-enhanced-dataset.jpg)
 
 New data! In this image, we can appreciate a more complete dataset compared to the imbalanced one. However, something seems off. It looks like the algorithm generated the new synthetic points in such a way that it resembles a line. 
 
@@ -246,12 +246,12 @@ Thus, since the connection between two points is a line, our final dataset looks
 
 If we increase k to 2, we can see how the connectivity across points extends.
 
-![Dataset balanced with synthetic data](http://new.shubhanshugupta.com/wp-content/uploads/2019/10/SMOTE-enhanced-dataset2.jpg)
+![Dataset balanced with synthetic data](/images/posts/handling-imbalanced-datasets-with-smote-in-python/SMOTE-enhanced-dataset2.jpg)
 *Still not a blob of red data*
 
 With k=8 we can observe a more vibrant, spherical, and classic looking dataset.
 
-![Using SMOTE with 8 nearest neighbors](http://new.shubhanshugupta.com/wp-content/uploads/2019/10/SMOTE-enhanced-dataset3.jpg)
+![Using SMOTE with 8 nearest neighbors](/images/posts/handling-imbalanced-datasets-with-smote-in-python/SMOTE-enhanced-dataset3.jpg)
 *From 10 red points to 340. Using SMOTE with the eight nearest neighbors results in a dataset that might pass for a genuine, non-synthetic dataset*
 
 If we compare this dataset with the original one, we can see that the main difference is how tightly self-contained the new data are. 
@@ -266,7 +266,7 @@ clf = train_SVM(df)
 plot_svm_boundary(clf, df, 'Decision Boundary of SVM trained with a synthetic dataset')
 ```
 
-![Comparison of balanced model and smote'd model hyperplanes](http://new.shubhanshugupta.com/wp-content/uploads/2019/10/Balanced-and-SMOTEd-model.jpg)
+![Comparison of balanced model and smote'd model hyperplanes](/images/posts/handling-imbalanced-datasets-with-smote-in-python/Balanced-and-SMOTEd-model.jpg)
 *Balanced model and SMOTE’d model hyperplanes.*
 
 The left image shows the decision boundary of the original model, while the right one displays that of the **SMOTE’d** model. For starters, the hyperplane of the **SMOTE’d** model seems to favor the blue class, while the original SVM sides with the red class. I assume that the cause of this hyperplane shape is the lack of noisy red points among the blue cluster. 

@@ -6,7 +6,7 @@ category: "technical"
 description: "Pandas Library Data cleaning is an essential step to prepare your data for the analysis"
 ---
 
-![pandas](http://new.shubhanshugupta.com/wp-content/uploads/2020/06/image.png)
+![pandas](/images/posts/speed-up-apply-function-pandas-dataframe/image.png)
 *Pandas Library*
 
 Data cleaning is an essential step to prepare your data for the analysis. While cleaning the data, every now and then, there's a need to create a new column in the Pandas dataframe. It's usually conditioned on a function which manipulates an existing column. A strategic way to achieve that is by using Apply function. I want to address a couple of bottlenecks here:
@@ -155,7 +155,7 @@ You can implement your own GPU accelerated pandas dataframe operations and run a
 
 This wraps up my article in which I wanted to share with you a few techniques through which you can speed up your Pandas performance. I did this research because of the similar performance issue that, I thought I was facing. Unfortunately, none of the techniques above, were giving me satisfactory performance gain. I eventually posted a [question on stackoverflow](https://stackoverflow.com/questions/61982063/how-to-speed-up-pandas-apply-function-to-create-a-new-column-in-the-dataframe) and came to know that I had an IO issue (because of API calls) and not much of a CPU issue. So I landed up using _**[lru cache](https://docs.python.org/3/library/functools.html#functools.lru_cache)**_. However, I am glad I did all the research and learnt so much so that I could share this blog with you! Do let me know if you know of any other technique or any feedback or suggestions.
 
-![that's all folks](http://new.shubhanshugupta.com/wp-content/uploads/2020/05/thats-all-folks.gif)
+![that's all folks](/images/posts/speed-up-apply-function-pandas-dataframe/thats-all-folks.gif)
 
 ---
 

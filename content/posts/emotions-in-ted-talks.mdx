@@ -36,7 +36,7 @@ After computing the score, I am going to prepare a dataframe containing the cate
 
 One such dataframe looks like:
 
-![Document Emotion Score Dataframe](http://new.shubhanshugupta.com/wp-content/uploads/2018/11/Screen-Shot-2018-11-29-at-8.10.23-PM-300x207.png)
+![Document Emotion Score Dataframe](/images/posts/emotions-in-ted-talks/Screen-Shot-2018-11-29-at-8.10.23-PM-300x207.png)
 
 Subsequently, I join all the dataframes together by their document number. This results in a single dataframe containing the scores of each category for each document.
 
@@ -44,7 +44,7 @@ Subsequently, I join all the dataframes together by their document number. This 
 
 This step results in the dataframe that looks like this:
 
-![Document Emotion Score Dataframe](http://new.shubhanshugupta.com/wp-content/uploads/2018/11/Screen-Shot-2018-11-29-at-8.16.39-PM-300x89.png)
+![Document Emotion Score Dataframe](/images/posts/emotions-in-ted-talks/Screen-Shot-2018-11-29-at-8.16.39-PM-300x89.png)
 
 #### **VISUALIZATION VIA HEATMAP**
 
@@ -54,7 +54,7 @@ The next step is to make a heatmap for visualization. I use heatmap.2 function i
 
 The code results in the heatmap below.
 
-![Emotions in Ted Talks](http://new.shubhanshugupta.com/wp-content/uploads/2018/11/Screen-Shot-2018-11-29-at-10.45.52-PM-300x179.png)  
+![Emotions in Ted Talks](/images/posts/emotions-in-ted-talks/Screen-Shot-2018-11-29-at-10.45.52-PM-300x179.png)  
 As you can see in the heatmap above, red color dominates throughout. A clear cut reasoning for that lies in the fact that the DTM is extremely sparse. With 99% sparsity in DTM, the words in the five categories (emotional, pleasure, pain, virtue and vice) could not match the majority of the terms present in our DTM. Small stretches of yellow lines denote the presence of particular emotions - virtue in this case. This means that speakers in their Ted Talks use a lot of words related to virtue in their speeches. The result could be different if you use different category of emotions.
 
 That’s all for now. I will discuss a new task related to NLP in my next blog. So stay tuned.
