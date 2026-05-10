@@ -117,8 +117,8 @@ export default function Personal() {
                     <a
                       key={link.label}
                       href={link.url}
-                      target={link.url.startsWith("http") ? "_blank" : undefined}
-                      rel={link.url.startsWith("http") ? "noopener noreferrer" : undefined}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 text-sm font-medium text-copper-500 hover:text-copper-700 transition-colors"
                     >
                       {link.label}

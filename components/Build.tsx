@@ -276,23 +276,41 @@ export default function Build() {
 
         {/* CHANGE 8: upgraded advising signal */}
         <AnimateIn>
-          <div className="rounded-2xl bg-hero text-white p-8 md:p-10 flex flex-col md:flex-row items-start md:items-center gap-6 justify-between">
-            <div>
+          <div className="rounded-2xl bg-hero text-white p-8 md:p-12">
+            <div className="mb-8">
               <p className="font-mono text-xs text-copper-500 tracking-widest uppercase mb-3">
                 Open for select work
               </p>
-              <h3 className="font-display font-semibold italic text-2xl md:text-3xl text-white mb-2">
-                Have an interesting problem?
+              <h3 className="font-display font-semibold italic text-2xl md:text-3xl text-white mb-4">
+                Any industry. Any problem.
               </h3>
-              <p className="text-white/55 text-sm leading-relaxed max-w-lg">
-                I advise and, occasionally, build. Particularly in fintech, regulated AI,
-                and cross-border payments. If you&apos;re working on something at the intersection
-                of these things and want a PM who ships — bring the problem, not just the brief.
+              <p className="text-white/55 text-sm leading-relaxed max-w-2xl mb-6">
+                I bring structured problem-solving, product rigour, and a track record of shipping — across
+                industries, not just fintech. The pattern holds whether the domain is payments, hospitality,
+                fitness, or content.
+              </p>
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3 mb-6 max-w-2xl">
+                {[
+                  "Starting a restaurant, gym, or turf — is the location, pricing, and audience right for you?",
+                  "Want to grow your online presence and reach a wider audience but don’t know where to start?",
+                  "Running a small business and wondering which part to digitise first?",
+                  "Building a new product and unsure if the problem is real or the market is large enough?",
+                  "Need to validate a new business idea before you invest time and money into it?",
+                  "Looking for a clear, executable plan — not just another consultant’s slide deck?",
+                ].map((item) => (
+                  <li key={item} className="flex gap-2 text-sm text-white/45 leading-snug">
+                    <span className="text-copper-500 shrink-0 mt-0.5">→</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="text-white/60 text-sm leading-relaxed max-w-xl font-medium">
+                Bring the problem statement. I&apos;ll get you the solution. Let&apos;s build something together.
               </p>
             </div>
             <a
               href="mailto:shubhanshu.gupta93@gmail.com"
-              className="shrink-0 inline-flex items-center gap-2 px-6 py-3 bg-copper-500 text-white text-sm font-medium rounded-full hover:bg-copper-700 transition-colors duration-200"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-copper-500 text-white text-sm font-medium rounded-full hover:bg-copper-700 transition-colors duration-200"
             >
               Get in touch →
             </a>

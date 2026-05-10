@@ -40,24 +40,24 @@ const RESEARCH_ITEMS = [
 // CHANGE 10C: Speaking & Teaching cards
 const SPEAKING_ITEMS = [
   {
-    type: "Interview",
-    typeColor: "bg-cream-100 text-ink-700",
-    title: "Navigating Autonomy at the Workplace",
-    venue: "Recorded interview · YouTube",
-    detail:
-      "A candid conversation on professional life — specifically on how to operate with autonomy, own decisions, and maintain direction in large organisations. Originally recorded as part of a blog feature.",
-    link: "https://www.youtube.com/watch?v=F5qP3brApQc",
-    linkLabel: "Watch on YouTube",
-  },
-  {
     type: "YouTube Series",
     typeColor: "bg-cream-100 text-ink-700",
-    title: "AI Prototyping for Product Managers",
+    title: "Navigating Autonomy at the Workplace",
     venue: "YouTube playlist",
     detail:
-      "A series of recordings covering how product managers can apply AI tools for rapid hypothesis validation, data visualisation, and lightweight prototyping.",
+      "A candid conversation on professional life — specifically on how to operate with autonomy, own decisions, and maintain direction in large organisations. Originally recorded as part of a blog feature.",
     link: "https://www.youtube.com/playlist?list=PLUFVOl7WhQovfwvTaNRraW_Ox0iCZ0IbN",
     linkLabel: "View playlist",
+  },
+  {
+    type: "Talk",
+    typeColor: "bg-cream-100 text-ink-700",
+    title: "Natural Language Processing in Machine Learning",
+    venue: "Recorded talk · YouTube",
+    detail:
+      "A deep-dive talk on Natural Language Processing techniques in machine learning — covering practical approaches, model selection, and real-world applications in data-driven products.",
+    link: "https://www.youtube.com/watch?v=F5qP3brApQc",
+    linkLabel: "Watch on YouTube",
   },
 ];
 
