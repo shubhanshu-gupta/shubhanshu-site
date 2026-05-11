@@ -59,7 +59,7 @@ export function Footer() {
             { label: "LinkedIn", url: "https://www.linkedin.com/in/shubhanshugupta93/" },
             { label: "Twitter", url: "https://twitter.com/Shubhanshugupta" },
             { label: "Stablecoin Atlas", url: "https://stablecoinatlas.app" },
-            { label: "Resume", url: "https://shubhanshugupta.com/wp-content/uploads/2025/05/ShubhanshuGupta_Resume.pdf" },
+            { label: "Résumé", url: "https://drive.google.com/file/d/1K5GF78uKpTX_b2j9VLyQ7r0YJiGxy30t/view?usp=sharing" },
           ].map((link) => (
             <a
               key={link.label}

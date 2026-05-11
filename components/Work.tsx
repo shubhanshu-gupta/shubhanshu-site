@@ -1,12 +1,22 @@
 import AnimateIn from "./AnimateIn";
 
-const FOCUS_AREAS = [
+type FocusArea = {
+  number: string;
+  title: string;
+  description: string;
+  metric: string;
+  rails?: string;
+  icon: React.ReactNode;
+};
+
+const FOCUS_AREAS: FocusArea[] = [
   {
     number: "01",
-    title: "Cross-border Payments",
+    title: "Cross-border Payments & Instant Rails",
     description:
-      "End-to-end product ownership of cross-border payment rails spanning Asia Retail & Private Banking, with scope extending to EMEA and NAM. From concept through governance to live delivery.",
+      "End-to-end product ownership of cross-border payment rails across Asia Retail & Private Banking, EMEA, and NAM — from concept through governance to live delivery. Led the rollout of instant payment corridors across five countries, owning the full product lifecycle from regulatory approval to customer experience. Partnered directly with Treasury to own FX pricing, delivering benchmark-competitive cross-border rates.",
     metric: "30% transfer cost reduction · $1.2M incremental revenue · 5 corridors live",
+    rails: "IMPS (India) · FPS (UK) · FAST (SG) · PromptPay (Thailand) · RTR (Canada)",
     icon: (
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
         <circle cx="10" cy="10" r="8" stroke="currentColor" strokeWidth="1.2" />
@@ -65,7 +75,7 @@ const FOCUS_AREAS = [
 
 export default function Work() {
   return (
-    <section id="work" className="bg-cream-50 py-28 md:py-36">
+    <section id="work" className="bg-cream-50 py-16 md:py-36">
       <div className="max-w-site mx-auto px-6">
         <AnimateIn>
           <p className="section-label mb-4">01 · Professional</p>
@@ -73,13 +83,14 @@ export default function Work() {
             Payments at scale,<br className="hidden md:block" /> across three regions
           </h2>
           <p className="text-ink-500 text-lg leading-relaxed max-w-2xl mb-16">
-            As VP, Product Management at Citibank, I lead payments product across Asia Retail
-            &amp; Private Banking — responsible for conceptualisation, customer experience,
-            governance approvals, and final delivery. The scope spans Asia, EMEA, and NAM.
+            As VP, Product Management at Citibank Singapore, I lead payments product
+            across Asia Retail &amp; Private Banking — responsible for conceptualisation,
+            customer experience, governance approvals, and final delivery. The scope spans
+            cross-border and instant payment rails, FX pricing, AI use cases, regulatory
+            compliance, and digital consumer growth across Asia, EMEA, and NAM.
           </p>
         </AnimateIn>
 
-        {/* Focus areas grid — CHANGE 3: removed Payment Concierge, CHANGE 4: icons + metrics */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
           {FOCUS_AREAS.map((area, i) => (
             <AnimateIn key={area.number} delay={i * 80}>
@@ -94,8 +105,15 @@ export default function Work() {
                   {area.title}
                 </h3>
                 <p className="text-ink-500 text-sm leading-relaxed flex-1">{area.description}</p>
-                <div className="border-t border-cream-100 mt-4 pt-3">
-                  <p className="font-mono text-[11px] text-copper-500 leading-relaxed">{area.metric}</p>
+                <div className="border-t border-cream-100 mt-4 pt-3 space-y-1.5">
+                  <p className="font-mono text-[11px] text-copper-500 leading-relaxed">
+                    {area.metric}
+                  </p>
+                  {area.rails && (
+                    <p className="font-mono text-[11px] text-ink-300 leading-relaxed">
+                      {area.rails}
+                    </p>
+                  )}
                 </div>
               </div>
             </AnimateIn>
@@ -104,13 +122,13 @@ export default function Work() {
 
         {/* Credential strip */}
         <AnimateIn delay={100}>
-          <div className="mt-10 pt-10 border-t border-cream-200 flex flex-wrap gap-x-10 gap-y-3">
+          <div className="mt-10 pt-10 border-t border-cream-200 flex flex-wrap gap-x-10 gap-y-4 items-end">
             {[
-              { label: "Employer", value: "Citibank" },
-              { label: "Title", value: "Vice President, Product Management" },
-              { label: "Focus", value: "Payments · Deposits" },
-              { label: "Scope", value: "Asia · EMEA · NAM" },
-              { label: "Based in", value: "Singapore" },
+              { label: "Employer",  value: "Citibank" },
+              { label: "Title",     value: "Vice President, Product Management" },
+              { label: "Focus",     value: "Payments · Deposits" },
+              { label: "Scope",     value: "Asia · EMEA · NAM" },
+              { label: "Based in",  value: "Singapore" },
             ].map((item) => (
               <div key={item.label}>
                 <p className="font-mono text-[10px] text-ink-300 tracking-widest uppercase mb-0.5">
@@ -119,6 +137,17 @@ export default function Work() {
                 <p className="text-sm font-medium text-ink-700">{item.value}</p>
               </div>
             ))}
+            <a
+              href="https://drive.google.com/file/d/1K5GF78uKpTX_b2j9VLyQ7r0YJiGxy30t/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-xs font-medium text-copper-500 hover:text-copper-700 border border-copper-200 hover:border-copper-500 px-4 py-2 rounded-full transition-all duration-200 ml-auto"
+            >
+              View Résumé
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="M2 10L10 2M10 2H5M10 2V7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
+            </a>
           </div>
         </AnimateIn>
       </div>

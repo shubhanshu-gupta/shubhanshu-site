@@ -52,6 +52,16 @@ export default function Nav() {
             </a>
           ))}
           <a
+            href="https://drive.google.com/file/d/1K5GF78uKpTX_b2j9VLyQ7r0YJiGxy30t/view?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`text-sm font-medium transition-colors duration-300 hover:text-copper-500 ${
+              scrolled ? "text-ink-700" : "text-white/75"
+            }`}
+          >
+            Résumé
+          </a>
+          <a
             href="mailto:shubhanshu.gupta93@gmail.com"
             className="text-sm font-medium px-5 py-2 rounded-full bg-copper-500 text-white hover:bg-copper-700 transition-colors duration-200"
           >
@@ -99,6 +109,14 @@ export default function Nav() {
               {link.label}
             </a>
           ))}
+          <a
+            href="https://drive.google.com/file/d/1K5GF78uKpTX_b2j9VLyQ7r0YJiGxy30t/view?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm font-medium text-ink-700 hover:text-copper-500 transition-colors"
+          >
+            Résumé ↗
+          </a>
           <a
             href="mailto:shubhanshu.gupta93@gmail.com"
             className="text-sm font-medium text-center px-5 py-2.5 rounded-full bg-copper-500 text-white"
