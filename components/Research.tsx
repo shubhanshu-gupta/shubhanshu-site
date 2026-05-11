@@ -1,6 +1,5 @@
 import AnimateIn from "./AnimateIn";
 
-// CHANGE 10A: removed Talk/Teaching entry; CHANGE 10B: updated patent
 const RESEARCH_ITEMS = [
   {
     type: "Patent",
@@ -37,7 +36,6 @@ const RESEARCH_ITEMS = [
   },
 ];
 
-// CHANGE 10C: Speaking & Teaching cards
 const SPEAKING_ITEMS = [
   {
     type: "YouTube Series",
@@ -63,103 +61,48 @@ const SPEAKING_ITEMS = [
 
 export default function Research() {
   return (
-    <section id="research" className="bg-cream-50 py-28 md:py-36">
+    <section id="research" className="bg-cream-50 py-16 md:py-36">
       <div className="max-w-site mx-auto px-6">
-        {/* CHANGE 9: updated headline + subparagraph */}
+
         <AnimateIn>
           <p className="section-label mb-4">03 · Research &amp; IP</p>
           <h2 className="font-display text-4xl md:text-5xl font-semibold text-ink-900 ruled-heading mb-6">
             Research, patents &amp;<br className="hidden md:block" /> intellectual output
           </h2>
-          <p className="text-ink-500 text-lg leading-relaxed max-w-2xl mb-16">
+          <p className="text-ink-500 text-lg leading-relaxed max-w-2xl mb-12 md:mb-16">
             A USPTO patent, two peer-reviewed publications at international conferences,
             and a track record of turning research into shipped product.
           </p>
         </AnimateIn>
 
-        <div className="space-y-5">
+        {/* Research items — stacked cards, link always below content on mobile */}
+        <div className="space-y-4 md:space-y-5">
           {RESEARCH_ITEMS.map((item, i) => (
             <AnimateIn key={item.title} delay={i * 80}>
-              <div className="p-7 rounded-2xl bg-white border border-cream-200 card-lift">
-                <div className="flex flex-wrap items-start gap-4 justify-between">
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-3 mb-3">
-                      <span className={`text-xs font-mono px-2.5 py-1 rounded-full font-medium ${item.typeColor}`}>
-                        {item.type}
-                      </span>
-                      <span className="text-xs font-mono text-ink-300">{item.year}</span>
-                    </div>
-                    <h3 className="font-display font-semibold text-xl text-ink-900 mb-1">
-                      {item.title}
-                    </h3>
-                    <p className="text-xs font-mono text-ink-300 tracking-wide mb-3">
-                      {item.venue}
-                    </p>
-                    <p className="text-sm text-ink-500 leading-relaxed">{item.detail}</p>
-                  </div>
-                  <a
-                    href={item.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="shrink-0 flex items-center gap-2 text-xs font-medium text-copper-500 hover:text-copper-700 border border-copper-200 hover:border-copper-500 px-4 py-2 rounded-full transition-all duration-200"
-                  >
-                    {item.linkLabel}
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                      <path d="M2 10L10 2M10 2H5M10 2V7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                    </svg>
-                  </a>
+              <div className="p-5 md:p-7 rounded-2xl bg-white border border-cream-200 card-lift">
+                {/* Badge + year */}
+                <div className="flex items-center gap-3 mb-3">
+                  <span className={`text-xs font-mono px-2.5 py-1 rounded-full font-medium ${item.typeColor}`}>
+                    {item.type}
+                  </span>
+                  <span className="text-xs font-mono text-ink-300">{item.year}</span>
                 </div>
-              </div>
-            </AnimateIn>
-          ))}
-        </div>
 
-        {/* Credential summary */}
-        <AnimateIn delay={100}>
-          <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-6">
-            {[
-              { number: "1", label: "USPTO patent" },
-              { number: "2", label: "Peer-reviewed papers" },
-              { number: "2", label: "International conferences" },
-              { number: "9+", label: "Years of PM experience" },
-            ].map((stat) => (
-              <div key={stat.label} className="text-center p-6 rounded-2xl bg-white border border-cream-200">
-                <p className="font-display text-4xl font-semibold text-copper-500 mb-1">
-                  {stat.number}
+                {/* Title + venue */}
+                <h3 className="font-display font-semibold text-lg md:text-xl text-ink-900 mb-1 leading-snug">
+                  {item.title}
+                </h3>
+                <p className="text-xs font-mono text-ink-300 tracking-wide mb-3">
+                  {item.venue}
                 </p>
-                <p className="text-xs text-ink-500">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-        </AnimateIn>
 
-        {/* CHANGE 10C: Speaking & Teaching sub-section */}
-        <AnimateIn>
-          <h3 className="font-display font-semibold text-2xl text-ink-900 mb-6 mt-14">
-            Speaking &amp; Teaching
-          </h3>
-        </AnimateIn>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {SPEAKING_ITEMS.map((item, i) => (
-            <AnimateIn key={item.title} delay={i * 80}>
-              <div className="p-7 rounded-2xl bg-white border border-cream-200 card-lift flex flex-col h-full">
-                <div className="flex flex-wrap items-start gap-4 justify-between mb-auto">
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-3 mb-3">
-                      <span className={`text-xs font-mono px-2.5 py-1 rounded-full font-medium ${item.typeColor}`}>
-                        {item.type}
-                      </span>
-                    </div>
-                    <h3 className="font-display font-semibold text-xl text-ink-900 mb-1">
-                      {item.title}
-                    </h3>
-                    <p className="text-xs font-mono text-ink-300 tracking-wide mb-3">
-                      {item.venue}
-                    </p>
-                    <p className="text-sm text-ink-500 leading-relaxed">{item.detail}</p>
-                  </div>
-                </div>
-                <div className="mt-5">
+                {/* Detail — full width always */}
+                <p className="text-sm text-ink-500 leading-relaxed mb-4">
+                  {item.detail}
+                </p>
+
+                {/* Link — full row on mobile, floats right on md+ */}
+                <div className="flex md:justify-end">
                   <a
                     href={item.link}
                     target="_blank"
@@ -176,6 +119,76 @@ export default function Research() {
             </AnimateIn>
           ))}
         </div>
+
+        {/* Credential stats */}
+        <AnimateIn delay={100}>
+          <div className="mt-10 md:mt-14 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            {[
+              { number: "1",  label: "USPTO patent" },
+              { number: "2",  label: "Peer-reviewed papers" },
+              { number: "2",  label: "International conferences" },
+              { number: "9+", label: "Years of PM experience" },
+            ].map((stat) => (
+              <div key={stat.label} className="text-center p-5 md:p-6 rounded-2xl bg-white border border-cream-200">
+                <p className="font-display text-3xl md:text-4xl font-semibold text-copper-500 mb-1">
+                  {stat.number}
+                </p>
+                <p className="text-xs text-ink-500 leading-snug">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </AnimateIn>
+
+        {/* Speaking & Teaching */}
+        <AnimateIn>
+          <h3 className="font-display font-semibold text-2xl text-ink-900 mb-6 mt-12 md:mt-14">
+            Speaking &amp; Teaching
+          </h3>
+        </AnimateIn>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+          {SPEAKING_ITEMS.map((item, i) => (
+            <AnimateIn key={item.title} delay={i * 80}>
+              <div className="p-5 md:p-7 rounded-2xl bg-white border border-cream-200 card-lift flex flex-col">
+                {/* Badge */}
+                <div className="flex items-center gap-3 mb-3">
+                  <span className={`text-xs font-mono px-2.5 py-1 rounded-full font-medium ${item.typeColor}`}>
+                    {item.type}
+                  </span>
+                </div>
+
+                {/* Title + venue */}
+                <h3 className="font-display font-semibold text-lg md:text-xl text-ink-900 mb-1 leading-snug">
+                  {item.title}
+                </h3>
+                <p className="text-xs font-mono text-ink-300 tracking-wide mb-3">
+                  {item.venue}
+                </p>
+
+                {/* Detail */}
+                <p className="text-sm text-ink-500 leading-relaxed flex-1 mb-5">
+                  {item.detail}
+                </p>
+
+                {/* Link */}
+                <div>
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-xs font-medium text-copper-500 hover:text-copper-700 border border-copper-200 hover:border-copper-500 px-4 py-2 rounded-full transition-all duration-200"
+                  >
+                    {item.linkLabel}
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                      <path d="M2 10L10 2M10 2H5M10 2V7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </AnimateIn>
+          ))}
+        </div>
+
       </div>
     </section>
   );
