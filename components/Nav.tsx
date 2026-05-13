@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { trackEvent, EVENTS } from "@/lib/analytics";
 
 const NAV_LINKS = [
   { href: "#work",     label: "Work" },
@@ -8,6 +9,9 @@ const NAV_LINKS = [
   { href: "#writing",  label: "Writing" },
   { href: "#personal", label: "Personal" },
 ];
+
+const RESUME_URL =
+  "https://drive.google.com/file/d/1K5GF78uKpTX_b2j9VLyQ7r0YJiGxy30t/view?usp=sharing";
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -31,6 +35,7 @@ export default function Nav() {
         {/* Logo */}
         <a
           href="/"
+          onClick={() => trackEvent(EVENTS.NAV_LOGO_CLICKED)}
           className={`font-display font-semibold text-xl tracking-tight transition-colors duration-300 ${
             scrolled ? "text-ink-900" : "text-white"
           }`}
@@ -44,6 +49,12 @@ export default function Nav() {
             <a
               key={link.href}
               href={link.href}
+              onClick={() =>
+                trackEvent(EVENTS.NAV_LINK_CLICKED, {
+                  label: link.label,
+                  href: link.href,
+                })
+              }
               className={`text-sm font-medium transition-colors duration-300 hover:text-copper-500 ${
                 scrolled ? "text-ink-700" : "text-white/75"
               }`}
@@ -52,9 +63,10 @@ export default function Nav() {
             </a>
           ))}
           <a
-            href="https://drive.google.com/file/d/1K5GF78uKpTX_b2j9VLyQ7r0YJiGxy30t/view?usp=sharing"
+            href={RESUME_URL}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackEvent(EVENTS.NAV_RESUME_CLICKED)}
             className={`text-sm font-medium transition-colors duration-300 hover:text-copper-500 ${
               scrolled ? "text-ink-700" : "text-white/75"
             }`}
@@ -63,6 +75,9 @@ export default function Nav() {
           </a>
           <a
             href="mailto:shubhanshu.gupta93@gmail.com"
+            onClick={() =>
+              trackEvent(EVENTS.NAV_CTA_CLICKED, { label: "lets_talk" })
+            }
             className="text-sm font-medium px-5 py-2 rounded-full bg-copper-500 text-white hover:bg-copper-700 transition-colors duration-200"
           >
             Let&apos;s talk
@@ -71,10 +86,14 @@ export default function Nav() {
 
         {/* Mobile toggle */}
         <button
-          className={`md:hidden transition-colors ${
+          className={`md:hidden transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center ${
             scrolled ? "text-ink-900" : "text-white"
           }`}
-          onClick={() => setMobileOpen(!mobileOpen)}
+          onClick={() => {
+            const next = !mobileOpen;
+            setMobileOpen(next);
+            if (next) trackEvent(EVENTS.NAV_MOBILE_OPENED);
+          }}
           aria-label="Toggle menu"
         >
           <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
@@ -103,23 +122,37 @@ export default function Nav() {
             <a
               key={link.href}
               href={link.href}
-              onClick={() => setMobileOpen(false)}
-              className="text-sm font-medium text-ink-700 hover:text-copper-500 transition-colors"
+              onClick={() => {
+                setMobileOpen(false);
+                trackEvent(EVENTS.NAV_LINK_CLICKED, {
+                  label: link.label,
+                  href: link.href,
+                  source: "mobile",
+                });
+              }}
+              className="text-sm font-medium text-ink-700 hover:text-copper-500 transition-colors min-h-[44px] flex items-center"
             >
               {link.label}
             </a>
           ))}
           <a
-            href="https://drive.google.com/file/d/1K5GF78uKpTX_b2j9VLyQ7r0YJiGxy30t/view?usp=sharing"
+            href={RESUME_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm font-medium text-ink-700 hover:text-copper-500 transition-colors"
+            onClick={() => {
+              setMobileOpen(false);
+              trackEvent(EVENTS.NAV_RESUME_CLICKED);
+            }}
+            className="text-sm font-medium text-ink-700 hover:text-copper-500 transition-colors min-h-[44px] flex items-center"
           >
             Résumé ↗
           </a>
           <a
             href="mailto:shubhanshu.gupta93@gmail.com"
-            className="text-sm font-medium text-center px-5 py-2.5 rounded-full bg-copper-500 text-white"
+            onClick={() =>
+              trackEvent(EVENTS.NAV_CTA_CLICKED, { label: "lets_talk", source: "mobile" })
+            }
+            className="text-sm font-medium text-center px-5 py-2.5 rounded-full bg-copper-500 text-white min-h-[44px] flex items-center justify-center"
           >
             Let&apos;s talk
           </a>

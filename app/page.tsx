@@ -6,8 +6,6 @@ import Research from "@/components/Research";
 import Writing from "@/components/Writing";
 import Personal from "@/components/Personal";
 import { OpenCTA, Footer } from "@/components/CtaAndFooter";
-import { getAllPosts } from "@/lib/posts";
-
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -89,8 +87,6 @@ const jsonLd = {
 };
 
 export default function Home() {
-  const recentPosts = getAllPosts().slice(0, 4);
-
   return (
     <>
       {/* JSON-LD structured data for search engines & AI indexing */}
@@ -105,7 +101,7 @@ export default function Home() {
         <Work />
         <Build />
         <Research />
-        <Writing recentPosts={recentPosts} />
+        <Writing />
         <Personal />
         <OpenCTA />
       </main>

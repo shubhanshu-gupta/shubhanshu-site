@@ -1,9 +1,10 @@
+"use client";
 import AnimateIn from "./AnimateIn";
+import { trackEvent, EVENTS } from "@/lib/analytics";
 
 export function OpenCTA() {
   return (
     <section id="contact" className="bg-hero py-28 md:py-36 overflow-hidden relative">
-      {/* Accent glow */}
       <div
         className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] pointer-events-none opacity-[0.08]"
         style={{ background: "radial-gradient(ellipse, #C87D36, transparent 70%)" }}
@@ -23,7 +24,13 @@ export function OpenCTA() {
           <div className="flex flex-col sm:flex-row gap-4">
             <a
               href="mailto:shubhanshu.gupta93@gmail.com"
-              className="inline-flex items-center gap-2 px-7 py-3.5 bg-copper-500 text-white text-sm font-medium rounded-full hover:bg-copper-700 transition-colors duration-200"
+              onClick={() =>
+                trackEvent(EVENTS.FOOTER_CTA_CLICKED, {
+                  label: "get_in_touch",
+                  location: "open_cta_section",
+                })
+              }
+              className="inline-flex items-center gap-2 px-7 py-3.5 bg-copper-500 text-white text-sm font-medium rounded-full hover:bg-copper-700 transition-colors duration-200 min-h-[44px]"
             >
               Get in touch
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -34,7 +41,13 @@ export function OpenCTA() {
               href="https://shubhanshugupta.setmore.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-7 py-3.5 bg-transparent text-white/70 text-sm font-medium rounded-full border border-white/20 hover:border-white/50 hover:text-white transition-all duration-200"
+              onClick={() =>
+                trackEvent(EVENTS.FOOTER_CTA_CLICKED, {
+                  label: "book_mentoring",
+                  location: "open_cta_section",
+                })
+              }
+              className="inline-flex items-center gap-2 px-7 py-3.5 bg-transparent text-white/70 text-sm font-medium rounded-full border border-white/20 hover:border-white/50 hover:text-white transition-all duration-200 min-h-[44px]"
             >
               Book a mentoring session
             </a>
@@ -46,6 +59,12 @@ export function OpenCTA() {
 }
 
 export function Footer() {
+  const links = [
+    { label: "LinkedIn",        url: "https://www.linkedin.com/in/shubhanshugupta93/", platform: "linkedin" },
+    { label: "Twitter",         url: "https://twitter.com/Shubhanshugupta",            platform: "twitter" },
+    { label: "Stablecoin Atlas",url: "https://stablecoinatlas.app",                    platform: "stablecoin_atlas" },
+  ];
+
   return (
     <footer className="bg-ink-900 py-12">
       <div className="max-w-site mx-auto px-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
@@ -54,23 +73,30 @@ export function Footer() {
           <p className="text-xs font-mono text-ink-500">VP PM · Citibank · Singapore</p>
         </div>
 
-        <div className="flex items-center gap-6">
-          {[
-            { label: "LinkedIn", url: "https://www.linkedin.com/in/shubhanshugupta93/" },
-            { label: "Twitter", url: "https://twitter.com/Shubhanshugupta" },
-            { label: "Stablecoin Atlas", url: "https://stablecoinatlas.app" },
-            { label: "Résumé", url: "https://drive.google.com/file/d/1K5GF78uKpTX_b2j9VLyQ7r0YJiGxy30t/view?usp=sharing" },
-          ].map((link) => (
+        <div className="flex flex-wrap items-center gap-6">
+          {links.map((link) => (
             <a
               key={link.label}
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs text-ink-500 hover:text-copper-500 transition-colors font-mono tracking-wide"
+              onClick={() =>
+                trackEvent(EVENTS.FOOTER_SOCIAL_CLICKED, { platform: link.platform })
+              }
+              className="text-xs text-ink-500 hover:text-copper-500 transition-colors font-mono tracking-wide min-h-[44px] flex items-center"
             >
               {link.label}
             </a>
           ))}
+          <a
+            href="https://drive.google.com/file/d/1K5GF78uKpTX_b2j9VLyQ7r0YJiGxy30t/view?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => trackEvent(EVENTS.FOOTER_RESUME_CLICKED, { source: "footer" })}
+            className="text-xs text-ink-500 hover:text-copper-500 transition-colors font-mono tracking-wide min-h-[44px] flex items-center"
+          >
+            Résumé
+          </a>
         </div>
       </div>
 

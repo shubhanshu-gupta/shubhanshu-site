@@ -1,3 +1,6 @@
+"use client";
+import { trackEvent, EVENTS } from "@/lib/analytics";
+
 export default function Hero() {
   return (
     <section className="relative min-h-screen bg-hero flex flex-col justify-center overflow-hidden">
@@ -70,11 +73,14 @@ export default function Hero() {
           </p>
         </div>
 
-        {/* CTAs — primary points to professional work; secondary row for projects + mentoring */}
+        {/* CTAs */}
         <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <a
             href="#work"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-copper-500 text-white text-sm font-medium rounded-full hover:bg-copper-700 transition-colors duration-200"
+            onClick={() =>
+              trackEvent(EVENTS.HERO_CTA_CLICKED, { label: "my_professional_work" })
+            }
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-copper-500 text-white text-sm font-medium rounded-full hover:bg-copper-700 transition-colors duration-200 min-h-[44px]"
           >
             My professional work
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -84,7 +90,10 @@ export default function Hero() {
 
           <a
             href="#build"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-transparent text-white/80 text-sm font-medium rounded-full border border-white/20 hover:border-white/50 hover:text-white transition-all duration-200"
+            onClick={() =>
+              trackEvent(EVENTS.HERO_CTA_CLICKED, { label: "side_projects" })
+            }
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-transparent text-white/80 text-sm font-medium rounded-full border border-white/20 hover:border-white/50 hover:text-white transition-all duration-200 min-h-[44px]"
           >
             Side projects &amp; products
           </a>
@@ -93,17 +102,23 @@ export default function Hero() {
             href="https://shubhanshugupta.setmore.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-transparent text-white/80 text-sm font-medium rounded-full border border-white/20 hover:border-white/50 hover:text-white transition-all duration-200"
+            onClick={() =>
+              trackEvent(EVENTS.HERO_CTA_CLICKED, { label: "book_mentoring" })
+            }
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-transparent text-white/80 text-sm font-medium rounded-full border border-white/20 hover:border-white/50 hover:text-white transition-all duration-200 min-h-[44px]"
           >
             Book mentoring
           </a>
         </div>
 
-        {/* Text link to writing — lighter weight, beneath the CTA row */}
+        {/* Text link to writing */}
         <p className="mt-5">
           <a
             href="#writing"
-            className="font-mono text-[0.65rem] text-white/30 tracking-widest uppercase hover:text-white/60 transition-colors"
+            onClick={() =>
+              trackEvent(EVENTS.HERO_CTA_CLICKED, { label: "read_my_writing_arrow" })
+            }
+            className="font-mono text-[0.65rem] text-white/30 tracking-widest uppercase hover:text-white/60 transition-colors min-h-[44px] inline-flex items-center"
           >
             Read my writing →
           </a>

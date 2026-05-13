@@ -1,4 +1,6 @@
+"use client";
 import AnimateIn from "./AnimateIn";
+import { trackEvent, EVENTS } from "@/lib/analytics";
 
 type FocusArea = {
   number: string;
@@ -141,6 +143,9 @@ export default function Work() {
               href="https://drive.google.com/file/d/1K5GF78uKpTX_b2j9VLyQ7r0YJiGxy30t/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() =>
+                trackEvent(EVENTS.WORK_RESUME_CLICKED, { source: "work_section" })
+              }
               className="inline-flex items-center gap-2 text-xs font-medium text-copper-500 hover:text-copper-700 border border-copper-200 hover:border-copper-500 px-4 py-2 rounded-full transition-all duration-200 ml-auto"
             >
               View Résumé
