@@ -2,18 +2,68 @@
 import AnimateIn from "./AnimateIn";
 import { trackEvent, EVENTS } from "@/lib/analytics";
 
-const RESEARCH_ITEMS = [
+// ── PhotoStrip ─────────────────────────────────────────────────────────────
+// Renders a horizontal row of images; each is greyscale at rest, full colour on hover.
+function PhotoStrip({ photos }: { photos: { src: string; alt: string }[] }) {
+  return (
+    <div className="flex gap-2 mt-6">
+      {photos.map((photo, i) => (
+        <div
+          key={i}
+          className="flex-1 relative h-28 overflow-hidden rounded-xl"
+        >
+          <img
+            src={photo.src}
+            alt={photo.alt}
+            className="w-full h-full object-cover transition-all duration-500 grayscale hover:grayscale-0 cursor-pointer"
+          />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// ── Data ───────────────────────────────────────────────────────────────────
+
+const RESEARCH_ITEMS: {
+  type: string;
+  typeColor: string;
+  title: string;
+  venue: string;
+  year: string;
+  detail: string;
+  link: string;
+  linkLabel: string;
+  trackProps: Record<string, string>;
+  logo?: { src: string; alt: string };
+  photos?: { src: string; alt: string }[];
+}[] = [
   {
     type: "Patent",
     typeColor: "bg-copper-100 text-copper-700",
     title: "Machine Learning Modeling to Identify Sensitive Data",
-    venue: "USPTO · US-20260119715-A1 · Also filed in Singapore",
+    venue: "US Patent · US-20260119715-A1 · Also filed in Singapore",
     year: "Granted May 2024",
     detail:
       "Filed as lead inventor while leading the AI/ML Centre of Excellence at Citibank. Covers a probabilistic ML + NLP-based framework for detecting and classifying PII sensitivity in enterprise data pipelines. The patented system is currently expanding across all Citi markets worldwide, integrating seamlessly into Citi's data pipelines to uphold data governance and integrity.",
-    link: "https://ppubs.uspto.gov/api/pdf/downloadPdf/20260119715",
-    linkLabel: "View on USPTO",
+    link: "https://drive.google.com/file/d/1QRrDQR7z5edCxfegRp5oHnw4Mw12eV0M/view?usp=sharing",
+    linkLabel: "View patent",
     trackProps: { type: "patent", title: "PII Detection" },
+    logo: { src: "/images/logos/uspto.svg", alt: "USPTO" },
+    photos: [
+      {
+        src: "https://media.licdn.com/dms/image/v2/D5622AQGJEvbfgNe6AQ/feedshare-shrink_1280/feedshare-shrink_1280/0/1716653134468?e=1780531200&v=beta&t=KlDGyul_KZ_b4xQdZo0WPqxeCt_m_vOVq1xiO4cZ1BA",
+        alt: "US Patent grant — Shubhanshu Gupta",
+      },
+      {
+        src: "https://media.licdn.com/dms/image/v2/D5622AQGMec3LqqnS2A/feedshare-shrink_1280/feedshare-shrink_1280/0/1716653137396?e=1780531200&v=beta&t=ghCGgY1QoqScF-oS3xyvnZJNGGPrpiMEy6zb9S1FYB8",
+        alt: "Patent certificate — Shubhanshu Gupta",
+      },
+      {
+        src: "https://media.licdn.com/dms/image/v2/D5622AQHpdDXv6yerPw/feedshare-image-high-res/feedshare-image-high-res/0/1716653135269?e=1780531200&v=beta&t=9peAM7dh6xruW89FvbYP4TVvEzSVgZCGgj1ha6HXx4c",
+        alt: "Patent filing celebration — Shubhanshu Gupta",
+      },
+    ],
   },
   {
     type: "Publication",
@@ -26,6 +76,17 @@ const RESEARCH_ITEMS = [
     link: "https://drive.google.com/file/d/1O9whOdvgHXS-Wkqx4muZYw0PniXAMUPm/view",
     linkLabel: "View paper",
     trackProps: { type: "publication", title: "Music Data Analysis" },
+    logo: { src: "/images/logos/harvard.svg", alt: "Harvard University" },
+    photos: [
+      {
+        src: "/images/posts/harvard-1.JPG",
+        alt: "Presenting at Harvard — ASE BigData Conference 2016",
+      },
+      {
+        src: "/images/posts/harvard-2.JPG",
+        alt: "Harvard University conference — 2016",
+      },
+    ],
   },
   {
     type: "Publication",
@@ -38,6 +99,7 @@ const RESEARCH_ITEMS = [
     link: "https://arxiv.org/abs/1702.07651",
     linkLabel: "View on arXiv",
     trackProps: { type: "publication", title: "Social Data Analysis" },
+    logo: { src: "/images/logos/vmware.svg", alt: "VMware" },
   },
 ];
 
@@ -76,7 +138,7 @@ export default function Research() {
             Research, patents &amp;<br className="hidden md:block" /> intellectual output
           </h2>
           <p className="text-ink-500 text-lg leading-relaxed max-w-2xl mb-16">
-            A USPTO patent, two peer-reviewed publications at international conferences,
+            A US patent, two peer-reviewed publications at international conferences,
             and a track record of turning research into shipped product.
           </p>
         </AnimateIn>
@@ -96,9 +158,18 @@ export default function Research() {
                     <h3 className="font-display font-semibold text-xl text-ink-900 mb-1">
                       {item.title}
                     </h3>
-                    <p className="text-xs font-mono text-ink-300 tracking-wide mb-3">
-                      {item.venue}
-                    </p>
+                    <div className="flex items-center gap-2 mb-3">
+                      {item.logo && (
+                        <img
+                          src={item.logo.src}
+                          alt={item.logo.alt}
+                          className="w-5 h-5 object-contain grayscale opacity-50 shrink-0"
+                        />
+                      )}
+                      <p className="text-xs font-mono text-ink-300 tracking-wide">
+                        {item.venue}
+                      </p>
+                    </div>
                     <p className="text-sm text-ink-500 leading-relaxed">{item.detail}</p>
                   </div>
                   <a
@@ -116,6 +187,9 @@ export default function Research() {
                     </svg>
                   </a>
                 </div>
+                {item.photos && item.photos.length > 0 && (
+                  <PhotoStrip photos={item.photos} />
+                )}
               </div>
             </AnimateIn>
           ))}
@@ -125,7 +199,7 @@ export default function Research() {
         <AnimateIn delay={100}>
           <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
-              { number: "1",  label: "USPTO patent" },
+              { number: "1",  label: "US patent" },
               { number: "2",  label: "Peer-reviewed papers" },
               { number: "2",  label: "International conferences" },
               { number: "9+", label: "Years of PM experience" },

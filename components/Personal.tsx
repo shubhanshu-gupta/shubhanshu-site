@@ -2,7 +2,34 @@
 import AnimateIn from "./AnimateIn";
 import { trackEvent, EVENTS } from "@/lib/analytics";
 
-const TILES = [
+// ── PhotoStrip ─────────────────────────────────────────────────────────────
+// Horizontal row of images; greyscale at rest, full colour on hover.
+function PhotoStrip({ photos }: { photos: { src: string; alt: string }[] }) {
+  return (
+    <div className="flex gap-2 mt-5">
+      {photos.map((photo, i) => (
+        <div key={i} className="flex-1 relative h-28 overflow-hidden rounded-xl">
+          <img
+            src={photo.src}
+            alt={photo.alt}
+            className="w-full h-full object-cover transition-all duration-500 grayscale hover:grayscale-0 cursor-pointer"
+          />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// ── Data ───────────────────────────────────────────────────────────────────
+
+const TILES: {
+  icon: React.ReactNode;
+  title: string;
+  body: string;
+  links: { label: string; url: string; trackLabel: string }[];
+  tile: string;
+  photos?: { src: string; alt: string }[];
+}[] = [
   {
     icon: (
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
@@ -24,6 +51,12 @@ const TILES = [
       { label: "View the YouTube series →", url: "https://www.youtube.com/playlist?list=PLUFVOl7WhQovfwvTaNRraW_Ox0iCZ0IbN", trackLabel: "youtube_series" },
     ],
     tile: "teaching",
+    photos: [
+      {
+        src: "/images/posts/scratch-bootcamp/Photo3-1024x768.jpg",
+        alt: "Teaching kids to code at Scratch bootcamp",
+      },
+    ],
   },
   {
     icon: (
@@ -128,6 +161,9 @@ export default function Personal() {
                     </a>
                   ))}
                 </div>
+                {tile.photos && tile.photos.length > 0 && (
+                  <PhotoStrip photos={tile.photos} />
+                )}
               </div>
             </AnimateIn>
           ))}
