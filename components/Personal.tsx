@@ -109,6 +109,16 @@ const TILES: {
       { label: "Food notes", url: "/blog?category=food", trackLabel: "food_notes" },
     ],
     tile: "food_travel",
+    photos: [
+      {
+        src: "/images/posts/Food 1.jpeg",
+        alt: "Food & travel — Shubhanshu Gupta",
+      },
+      {
+        src: "/images/posts/Food 2.jpeg",
+        alt: "Food & travel — Shubhanshu Gupta",
+      },
+    ],
   },
 ];
 
